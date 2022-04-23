@@ -13,4 +13,9 @@
     <color name="light_blue_A200">#FF40C4FF</color>
     <color name="light_blue_A400">#FF00B0FF</color>
     <color name="black_overlay">#66000000</color>
+    
+    <color name="temp_Kuning_lemon">#FDDB3A</color>
+    <color name="temp_Kuning_layu">#D5C455</color>
+    <color name="temp_Kuning_semi_abu">#EDE59A</color>
+    <color name="temp_Abu">#EDE59A</color>
 </resources>
