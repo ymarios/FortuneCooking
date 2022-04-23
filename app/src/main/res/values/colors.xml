@@ -18,4 +18,7 @@
     <color name="temp_Kuning_layu">#D5C455</color>
     <color name="temp_Kuning_semi_abu">#EDE59A</color>
     <color name="temp_Abu">#EDE59A</color>
+    <color name="temp_Kuning_semi_abu_opacity_40">#66EDE59A</color>
+    <color name="temp_Kuning_lemon_opacity_80">#80FDDB3A</color>
+
 </resources>

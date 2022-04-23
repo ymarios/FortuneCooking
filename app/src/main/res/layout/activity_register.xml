@@ -31,6 +31,7 @@
         android:layout_marginBottom="15dp"
         android:fontFamily="@font/aleo_bold"
         android:text="Daftar"
+        android:textColor="@color/white"
         android:textSize="34sp" />
 
     <TextView
@@ -39,6 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
         android:text="Simpan resep lezat dan dapatkan konten pribadimu"
+        android:textColor="@color/white"
         android:textSize="16sp" />
 
     <androidx.cardview.widget.CardView
@@ -46,7 +48,7 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
-        app:cardBackgroundColor="@color/temp_Kuning_semi_abu"
+        app:cardBackgroundColor="@color/temp_Kuning_semi_abu_opacity_40"
         app:cardCornerRadius="15dp">
 
         <EditText
@@ -69,7 +71,7 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
-        app:cardBackgroundColor="@color/temp_Kuning_semi_abu"
+        app:cardBackgroundColor="@color/temp_Kuning_semi_abu_opacity_40"
         app:cardCornerRadius="15dp">
 
         <EditText
@@ -91,7 +93,7 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
-        app:cardBackgroundColor="@color/temp_Kuning_semi_abu"
+        app:cardBackgroundColor="@color/temp_Kuning_semi_abu_opacity_40"
         app:cardCornerRadius="15dp">
 
         <EditText
@@ -114,7 +116,7 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
-        app:cardBackgroundColor="@color/temp_Kuning_semi_abu"
+        app:cardBackgroundColor="@color/temp_Kuning_semi_abu_opacity_40"
         app:cardCornerRadius="15dp">
 
         <EditText
@@ -132,7 +134,7 @@
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_register_submit"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -140,6 +142,6 @@
         android:background="@color/temp_Kuning_lemon"
         android:defaultFocusHighlightEnabled="true"
         android:shadowColor="@color/black"
-        android:text="Button"
+        android:text="Submit"
         android:textColor="@color/white" />
 </LinearLayout>
