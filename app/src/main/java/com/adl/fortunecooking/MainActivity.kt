@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 //        // Hide both the status bar and the navigation bar
 //        windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
 
+//aaaaaaaaaaaaaaaaaaaaaa nambah komen
 
         Handler().postDelayed({ //This method will be executed once the timer is over
             // Start your app main activity
