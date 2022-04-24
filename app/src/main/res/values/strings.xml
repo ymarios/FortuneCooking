@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">FortuneCooking</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_favorite">Favorites</string>
+    <string name="nav_search">Search</string>
+    <string name="nav_account">Account</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>

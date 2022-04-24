@@ -17,5 +17,8 @@
     <color name="temp_Kuning_lemon">#FDDB3A</color>
     <color name="temp_Kuning_layu">#D5C455</color>
     <color name="temp_Kuning_semi_abu">#EDE59A</color>
+    <color name="nav_color">#F7D848</color>
+
     <color name="temp_Abu">#EDE59A</color>
+    <color name="temp_kuning_cerah">#F6F4E6</color>
 </resources>
