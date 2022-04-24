@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@drawable/background_register"
     android:orientation="vertical"
     tools:context=".RegisterActivity">
@@ -15,8 +15,8 @@
 
         <ImageButton
             android:id="@+id/btnBackRegister"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginLeft="25dp"
             android:layout_marginTop="25dp"
             app:srcCompat="@drawable/icon_back" />
@@ -144,4 +144,5 @@
         android:shadowColor="@color/black"
         android:text="Submit"
         android:textColor="@color/white" />
+
 </LinearLayout>

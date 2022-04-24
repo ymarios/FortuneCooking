@@ -24,11 +24,11 @@ class MainActivity : AppCompatActivity() {
 
         Handler().postDelayed({ //This method will be executed once the timer is over
             // Start your app main activity
-            val i = Intent(this@MainActivity, HomeActivity::class.java)
+            val i = Intent(this@MainActivity, RegisterActivity::class.java)
             startActivity(i)
             // close this activity
             finish()
-        }, 10000)
+        }, 3000)
 
 //        startActivity(Intent(this@MainActivity, HomeActivity::class.java))
 //        finish()
