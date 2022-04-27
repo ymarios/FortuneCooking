@@ -11,13 +11,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
+
         android:orientation="vertical">
 
         <com.google.android.material.card.MaterialCardView
             style="@style/bennerStyle"
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            app:cardBackgroundColor="@color/temp_Kuning_semi_abu">
+            app:cardBackgroundColor="@color/temp_Kuning_semi_abu"
+            app:cardElevation="30dp"
+            app:cardUseCompatPadding="false">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -59,9 +62,23 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <androidx.recyclerview.widget.RecyclerView
+        <TextView
+            android:id="@+id/textView3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alata"
+            android:text="Trending Food"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvFood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:scrollbars="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/card_holder" />
 
     </LinearLayout>
 
