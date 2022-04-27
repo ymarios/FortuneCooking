@@ -16,4 +16,16 @@
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="simpan_resep_lezat_dan_dapatkan_konten_pribadimu">Simpan resep lezat dan dapatkan konten pribadimu</string>
+    <string name="daftar">Daftar</string>
+    <string name="nama">Nama</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="konfirmasi_password">Konfirmasi Password</string>
+    <string name="register">Register</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="login">Login</string>
+    <string name="remember_me">Remember me</string>
+
 </resources>
