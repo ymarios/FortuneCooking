@@ -36,6 +36,7 @@ class LoginActivity : AppCompatActivity() {
                 editor.commit()
             }else{
                 editor.remove("username")
+                editor.remove("password")
                 editor.commit()
             }
             login()
