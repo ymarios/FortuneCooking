@@ -17,10 +17,11 @@
             android:id="@+id/btnBackRegister"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:drawableLeft="@drawable/ic_back"
             android:layout_marginLeft="25dp"
+            android:layout_marginTop="25dp"
             android:background="@android:color/transparent"
-            android:layout_marginTop="25dp"/>
+            android:drawableLeft="@drawable/ic_back"
+            tools:ignore="SpeakableTextPresentCheck" />
 
     </LinearLayout>
 
@@ -32,7 +33,7 @@
         android:layout_marginTop="25dp"
         android:layout_marginBottom="15dp"
         android:fontFamily="@font/aleo_bold"
-        android:text="Daftar"
+        android:text="@string/daftar"
         android:textColor="@color/white"
         android:textSize="34sp" />
 
@@ -41,7 +42,7 @@
         android:layout_width="342dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
-        android:text="Simpan resep lezat dan dapatkan konten pribadimu"
+        android:text="@string/simpan_resep_lezat_dan_dapatkan_konten_pribadimu"
         android:textColor="@color/white"
         android:textSize="16sp" />
 
@@ -62,9 +63,11 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="5dp"
             android:ems="10"
-            android:hint="Nama"
+            android:hint="@string/nama"
             android:inputType="textPersonName"
-            android:textColorHint="@color/white" />
+            android:minHeight="48dp"
+            android:textColorHint="@color/white"
+            android:autofillHints="" />
 
     </androidx.cardview.widget.CardView>
 
@@ -77,16 +80,18 @@
         app:cardCornerRadius="15dp">
 
         <EditText
-            android:id="@+id/et_register_username"
+            android:id="@+id/et_register_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="5dp"
+            android:autofillHints=""
             android:ems="10"
-            android:hint="Username"
+            android:hint="@string/email"
             android:inputType="textPersonName"
+            android:minHeight="48dp"
             android:textColorHint="@color/white" />
     </androidx.cardview.widget.CardView>
 
@@ -107,9 +112,10 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="5dp"
             android:ems="10"
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="textPassword"
-            android:textColorHint="@color/white" />
+            android:textColorHint="@color/white"
+            android:autofillHints="" />
 
     </androidx.cardview.widget.CardView>
 
@@ -130,9 +136,10 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="5dp"
             android:ems="10"
-            android:hint="Konfirmasi Password"
+            android:hint="@string/konfirmasi_password"
             android:inputType="textPassword"
-            android:textColorHint="@color/white" />
+            android:textColorHint="@color/white"
+            android:autofillHints="" />
     </androidx.cardview.widget.CardView>
 
     <Button
@@ -144,7 +151,7 @@
         android:background="@color/temp_Kuning_lemon"
         android:defaultFocusHighlightEnabled="true"
         android:shadowColor="@color/black"
-        android:text="Register"
+        android:text="@string/register"
         android:textColor="@color/white" />
 
 </LinearLayout>
