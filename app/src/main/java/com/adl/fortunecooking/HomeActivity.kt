@@ -7,6 +7,7 @@ import android.view.View
 import android.view.Window
 import android.view.WindowInsets
 import android.view.WindowManager
+import kotlinx.android.synthetic.main.card_holder.*
 
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
