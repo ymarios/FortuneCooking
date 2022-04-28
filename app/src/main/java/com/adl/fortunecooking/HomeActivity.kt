@@ -24,27 +24,27 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        replacementFragment(homeFragment)
+//        replacementFragment(homeFragment)
         setFullscreen()
 
-        bottom_navigation.setOnItemSelectedListener {
-            when(it.itemId) {
-                R.id.ic_home -> replacementFragment(homeFragment)
-                R.id.ic_search -> replacementFragment(searchFragment)
-                R.id.ic_favorite -> replacementFragment(favoritesFragment)
-                R.id.ic_account -> replacementFragment(accountFragment)
-            }
-            true
-        }
+//        bottom_navigation.setOnItemSelectedListener {
+//            when(it.itemId) {
+//                R.id.ic_home -> replacementFragment(homeFragment)
+//                R.id.ic_search -> replacementFragment(searchFragment)
+//                R.id.ic_favorite -> replacementFragment(favoritesFragment)
+//                R.id.ic_account -> replacementFragment(accountFragment)
+//            }
+//            true
+//        }
     }
 
-    private fun replacementFragment(fragment: Fragment){
-        if(fragment !=null){
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment_container, fragment)
-            transaction.commit()
-        }
-    }
+//    private fun replacementFragment(fragment: Fragment){
+//        if(fragment !=null){
+//            val transaction = supportFragmentManager.beginTransaction()
+//            transaction.replace(R.id.fragment_container, fragment)
+//            transaction.commit()
+//        }
+//    }
 
 
 
