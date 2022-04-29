@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.adl.fortunecooking.DetailResepActivity
 import com.adl.fortunecooking.LoginActivity
 import com.adl.fortunecooking.R
 import kotlinx.android.synthetic.main.fragment_account.*
@@ -42,6 +43,13 @@ class AccountFragment : Fragment() {
         btnLogOut.setOnClickListener({
             activity?.let{
                 val intent = Intent (it, LoginActivity::class.java)
+                it.startActivity(intent)
+            }
+        })
+
+        btnEditProfil.setOnClickListener({
+            activity?.let{
+                val intent = Intent(it, DetailResepActivity::class.java)
                 it.startActivity(intent)
             }
         })
