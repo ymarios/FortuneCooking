@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.App">
         <activity
+            android:name=".AddVideoActivity"
+            android:exported="false" />
+        <activity
             android:name=".DetailResepActivity"
             android:exported="false" />
         <activity

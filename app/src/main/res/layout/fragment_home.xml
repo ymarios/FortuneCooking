@@ -77,7 +77,23 @@
             android:orientation="horizontal"
             android:scrollbars="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/card_holder" />
+            tools:listitem="@layout/card_holder" >
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="180dp">-->
+
+<!--            <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--                android:id="@+id/addVideoFab"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignParentEnd="true"-->
+<!--                android:layout_alignParentBottom="true"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:src="@drawable/ic_add" />-->
+<!--        </RelativeLayout>-->
 
     </LinearLayout>
 

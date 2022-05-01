@@ -22,6 +22,11 @@
         <entry key="..\:/ADL/finalProject/FortuneCooking/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.24375" />
         <entry key="..\:/FortuneCooking/app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="..\:/FortuneCooking/app/src/main/res/layout/activity_main.xml" value="0.15" />
+        <entry key="..\:/Users/Paulus Agung Trianto/FortuneCooking/app/src/main/res/layout/activity_add_video.xml" value="0.25" />
+        <entry key="..\:/Users/Paulus Agung Trianto/FortuneCooking/app/src/main/res/layout/activity_dashboard.xml" value="0.17708333333333334" />
+        <entry key="..\:/Users/Paulus Agung Trianto/FortuneCooking/app/src/main/res/layout/activity_home.xml" value="0.25" />
+        <entry key="..\:/Users/Paulus Agung Trianto/FortuneCooking/app/src/main/res/layout/activity_register.xml" value="0.10989583333333333" />
+        <entry key="..\:/Users/Paulus Agung Trianto/FortuneCooking/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/Users/Robby AR/AndroidStudioProjects/FortuneCooking/app/src/main/res/layout/activity_dashboard.xml" value="0.10885416666666667" />
         <entry key="..\:/Users/Robby AR/AndroidStudioProjects/FortuneCooking/app/src/main/res/layout/activity_detail_resep.xml" value="0.264" />
         <entry key="..\:/Users/Robby AR/AndroidStudioProjects/FortuneCooking/app/src/main/res/layout/card_holder.xml" value="0.264" />
@@ -33,7 +38,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
