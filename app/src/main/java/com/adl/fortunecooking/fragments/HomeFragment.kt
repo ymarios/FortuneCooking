@@ -8,7 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.adl.fortunecooking.AddVideoActivity
+import com.adl.fortunecooking.DetailResepActivity
 import com.adl.fortunecooking.R
+import kotlinx.android.synthetic.main.fragment_account.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
@@ -28,4 +30,14 @@ class HomeFragment : Fragment() {
 //            startActivity(Intent(this,AddVideoActivity::class.java))
 //        }
 //    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        addVideoFab.setOnClickListener({
+            activity?.let{
+                val intent = Intent(it, AddVideoActivity::class.java)
+                it.startActivity(intent)
+            }
+        })
+    }
 }

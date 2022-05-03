@@ -49,17 +49,16 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun login() {
-//        auth.signInWithEmailAndPassword(txtEmail.text.toString(),txtPassword.text.toString()).addOnCompleteListener {
-//                it ->
-//            if(it.isSuccessful){
-//                val intent = Intent(this,DashboardActivity::class.java)
-//                startActivity(intent)
-//            }
-//        }.addOnFailureListener{
-//                exception -> Toast.makeText(applicationContext, exception.localizedMessage, Toast.LENGTH_LONG).show()
-//        }
-        val intent = Intent(this,DashboardActivity::class.java)
-        startActivity(intent)
+        auth.signInWithEmailAndPassword(txtEmail.text.toString(),txtPassword.text.toString()).addOnCompleteListener {
+                it ->
+            if(it.isSuccessful){
+                val intent = Intent(this,DashboardActivity::class.java)
+                startActivity(intent)
+            }
+        }.addOnFailureListener{
+                exception -> Toast.makeText(applicationContext, exception.localizedMessage, Toast.LENGTH_LONG).show()
+        }
+
     }
 
 

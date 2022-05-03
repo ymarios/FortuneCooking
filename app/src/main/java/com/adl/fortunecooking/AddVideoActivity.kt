@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.TextUtils
+import android.util.Log
 import android.widget.MediaController
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
@@ -43,12 +44,12 @@ class AddVideoActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_video)
 
         //init actionbar
-        actionBar = supportActionBar!!
+       // actionBar = supportActionBar!!
         //title
-        actionBar.title = "Add New Video"
+      //  actionBar.title = "Add New Video"
         //add back button
-        actionBar.setDisplayHomeAsUpEnabled(true)
-        actionBar.setDisplayShowHomeEnabled(true)
+       // actionBar.setDisplayHomeAsUpEnabled(true)
+      //  actionBar.setDisplayShowHomeEnabled(true)
 
         //init camera permission array
         cameraPermissions = arrayOf(android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -110,7 +111,7 @@ class AddVideoActivity : AppCompatActivity() {
                     hashMap["id"] = "$timestamp"
                     hashMap["title"] = "$title"
                     hashMap["videoUri"] = "$downloadUri"
-
+                    Log.d("data realtime : ", "${timestamp}, ${title} , ${downloadUri}")
                     //put the above info to db
                     val dbReference = FirebaseDatabase.getInstance().getReference("Videos")
                     dbReference.child(timestamp)
@@ -118,11 +119,13 @@ class AddVideoActivity : AppCompatActivity() {
                         .addOnSuccessListener { taskSnapshot ->
                             //video info added successfully
                             progressDialog.dismiss()
+                            Log.d("data realtime : ", "${timestamp}, ${title} , ${downloadUri}")
                             Toast.makeText(this,"Video Uploaded", Toast.LENGTH_SHORT).show()
                         }
                         .addOnFailureListener{ e ->
                             //failed adding video info
                             progressDialog.dismiss()
+                            Log.d("Error", e.message.toString() )
                             Toast.makeText(this,"${e.message}", Toast.LENGTH_SHORT).show()
                         }
                 }
@@ -130,6 +133,7 @@ class AddVideoActivity : AppCompatActivity() {
             .addOnFailureListener { e ->
                 //failed uploading
                 progressDialog.dismiss()
+                Log.d("Error", e.message.toString() )
                 Toast.makeText(this, "${e.message}", Toast.LENGTH_SHORT).show()
             }
     }

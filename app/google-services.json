@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "1078164145523",
-    "project_id": "fortunecooking-1a02f",
-    "storage_bucket": "fortunecooking-1a02f.appspot.com"
+    "project_number": "658433343058",
+    "project_id": "fortunecooking-203da",
+    "storage_bucket": "fortunecooking-203da.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1078164145523:android:b0ca4abb0eed1ec7b9b106",
+        "mobilesdk_app_id": "1:658433343058:android:98678a2da47b6c3285298b",
         "android_client_info": {
           "package_name": "com.adl.fortunecooking"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1078164145523-suj6ef9u8nn0c13d29jd0uhhf4smt2ls.apps.googleusercontent.com",
+          "client_id": "658433343058-08b77geni695pl69hfj2h7omq5jjus9a.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD0nviEYti7R_Zf7quO_A35lMqWXeakwSw"
+          "current_key": "AIzaSyDpf5_KZ3rjULYHatqfM8z0v1jJ_beox7Y"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1078164145523-suj6ef9u8nn0c13d29jd0uhhf4smt2ls.apps.googleusercontent.com",
+              "client_id": "658433343058-08b77geni695pl69hfj2h7omq5jjus9a.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
