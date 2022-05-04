@@ -1,5 +1,6 @@
 package com.adl.fortunecooking
 
+import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -23,6 +24,9 @@ class DashboardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
         setFullscreen()
+
+
+
 
         bottom_navigation.setOnItemSelectedListener {
             when(it.itemId) {

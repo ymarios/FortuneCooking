@@ -1,13 +1,14 @@
 package com.adl.fortunecooking
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.CheckBox
+import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 
+lateinit var uId:String
 class LoginActivity : AppCompatActivity() {
 
     lateinit var auth : FirebaseAuth
@@ -52,6 +53,13 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(txtEmail.text.toString(),txtPassword.text.toString()).addOnCompleteListener {
                 it ->
             if(it.isSuccessful){
+                //val edit=sharedPreference.edit()
+                val currentFirebaseUser = FirebaseAuth.getInstance().currentUser
+                Log.d("User sekarang :", "${currentFirebaseUser!!.uid}" )
+                //Toast.makeText(this, "" + currentFirebaseUser!!.uid, Toast.LENGTH_SHORT).show()
+                //edit.putString("uid", currentFirebaseUser.uid)
+                //edit.commit()
+                uId = currentFirebaseUser.uid
                 val intent = Intent(this,DashboardActivity::class.java)
                 startActivity(intent)
             }
