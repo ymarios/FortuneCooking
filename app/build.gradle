@@ -81,4 +81,8 @@ dependencies {
 
 }
 
+//imagepicker
+dependencies {
+    implementation 'com.github.Drjacky:ImagePicker:2.1.15'
 
+}

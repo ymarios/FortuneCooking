@@ -1,5 +1,6 @@
 package com.adl.fortunecooking
 
+import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -11,6 +12,7 @@ import android.text.TextUtils
 import android.util.Log
 import android.widget.MediaController
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
@@ -29,7 +31,7 @@ class AddVideoActivity : AppCompatActivity() {
     private val VIDEO_PICK_CAMERA_CODE = 101
     //constant to request camera permission to record video from camera
     private val CAMERA_REQUEST_CODE = 102
-
+    val REQUEST_CODE=100
     //array for camera request permissions
     private lateinit var cameraPermissions:Array<String>
 
@@ -37,8 +39,22 @@ class AddVideoActivity : AppCompatActivity() {
     private lateinit var progressDialog: ProgressDialog
 
     private var videoUri: Uri? = null //uri of picked video
-
+    lateinit var photoURI:Uri
     private var title:String = "";
+
+
+    private val cameraLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == Activity.RESULT_OK) {
+                val uri = it.data?.data!!
+
+                imgFood.setImageURI(uri)
+                photoURI=uri
+                //addImage=true
+
+
+            }
+        }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_video)
@@ -81,6 +97,10 @@ class AddVideoActivity : AppCompatActivity() {
         //handle click, pick video
         pickVideoFab.setOnClickListener {
             videoPickDialog()
+        }
+
+        btnpickImage.setOnClickListener{
+            imagePickDialog()
         }
     }
 
@@ -158,6 +178,19 @@ class AddVideoActivity : AppCompatActivity() {
 
     }
 
+    private fun imagePickDialog(){
+        val option= arrayOf("Camera", "Gallery")
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Pick Image From").setItems(option){dialogInterface, i->
+            if(i==0){
+                imagePickCamera()
+            }else{
+                //gallery clicked
+                imagePickGallery()
+            }
+        }.show()
+    }
+
     private fun videoPickDialog() {
         //options to display in dialog
         val options = arrayOf("Camera", "Gallery")
@@ -228,6 +261,23 @@ class AddVideoActivity : AppCompatActivity() {
         startActivityForResult(intent, VIDEO_PICK_CAMERA_CODE)
     }
 
+    private fun imagePickCamera(){
+        cameraLauncher.launch(
+            com.github.drjacky.imagepicker.ImagePicker.with(this)
+                .crop()
+                .cameraOnly()
+                .maxResultSize(480, 800, true)
+                .createIntent())
+
+    }
+    private fun imagePickGallery(){
+
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, REQUEST_CODE)
+    }
+
+
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed() //goto previous activity
         return super.onSupportNavigateUp()
@@ -258,6 +308,10 @@ class AddVideoActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE){
+            imgFood.setImageURI(data?.data) // handle chosen image
+
+        }
         if (resultCode == AppCompatActivity.RESULT_OK){
             //video is picked from camera or gallery
             if (requestCode == VIDEO_PICK_CAMERA_CODE){
@@ -269,6 +323,9 @@ class AddVideoActivity : AppCompatActivity() {
                 //video picked from gallery
                 videoUri = data!!.data
                 setVideoToVideoView()
+            }else if (requestCode == REQUEST_CODE){
+                imgFood.setImageURI(data?.data) // handle chosen image
+                photoURI = data?.data!!
             }
         }
         else{
