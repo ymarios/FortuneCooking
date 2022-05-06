@@ -29,15 +29,33 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="Name" />
+            android:text="Nama Makanan" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/titleEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:ems="10"
-            android:inputType="textPersonName" />
+            android:background="@color/white"
+            android:hint=""
+            android:inputType="textPersonName|textCapSentences"
+            android:padding="10dp"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Deskripsi Makanan" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtDescription"
+                android:layout_width="match_parent"
+                android:layout_height="150dp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/textView15"
@@ -46,73 +64,62 @@
             android:layout_margin="5dp"
             android:text="@string/cr" />
 
-        <ImageView
-            android:id="@+id/imgFood"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
-            app:srcCompat="@android:drawable/gallery_thumb" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btnpickImage"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:clickable="true"
-            app:backgroundTint="@color/temp_Kuning_layu"
-            app:srcCompat="@android:drawable/ic_menu_gallery" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imgFood"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                app:srcCompat="@android:drawable/gallery_thumb" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnpickImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                app:backgroundTint="@color/temp_Kuning_layu"
+                app:srcCompat="@android:drawable/ic_menu_gallery" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/textView19"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="Deskripsi" />
+            android:text="Bahan" />
 
-        <EditText
-            android:id="@+id/txtDescription"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:ems="10"
-            android:inputType="textPersonName" />
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtDescription"
+                android:layout_width="match_parent"
+                android:layout_height="150dp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/textView17"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="@string/bahan" />
+            android:text="Langkah - langkah" />
 
-        <EditText
-            android:id="@+id/editTextTextMultiLine"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtStep"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_margin="5dp" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:id="@+id/textView18"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="Langkah-langkah" />
-
-        <EditText
-            android:id="@+id/editTextTextMultiLine2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_margin="5dp" />
+                android:layout_height="150dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -121,17 +128,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:text="Input Video" />
-
-        <EditText
-            android:id="@+id/titleEt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@color/white"
-            android:hint="Enter title"
-            android:inputType="textPersonName|textCapSentences"
-            android:padding="10dp"
-            android:textColor="@color/black" />
 
         <VideoView
             android:id="@+id/videoView"
