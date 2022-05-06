@@ -31,7 +31,7 @@ class AddVideoActivity : AppCompatActivity() {
     private val VIDEO_PICK_CAMERA_CODE = 101
     //constant to request camera permission to record video from camera
     private val CAMERA_REQUEST_CODE = 102
-    val REQUEST_CODE=100
+
     //array for camera request permissions
     private lateinit var cameraPermissions:Array<String>
 
@@ -44,6 +44,19 @@ class AddVideoActivity : AppCompatActivity() {
 
 
     private val cameraLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == Activity.RESULT_OK) {
+                val uri = it.data?.data!!
+
+                imgFood.setImageURI(uri)
+                photoURI=uri
+                //addImage=true
+
+
+            }
+        }
+
+    private val imageGallery =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == Activity.RESULT_OK) {
                 val uri = it.data?.data!!
@@ -113,6 +126,8 @@ class AddVideoActivity : AppCompatActivity() {
 
         //file path and name in firebase storage
         val filePathName = "Videos/video_$timestamp"
+        val imagePathName = "Images/image_$timestamp"
+        //val uploadTask = mStorageRef.child("posts/${date}.png").putFile(imageFileUri)
 
         //storage reference
         val storageReference = FirebaseStorage.getInstance().getReference(filePathName)
@@ -125,30 +140,40 @@ class AddVideoActivity : AppCompatActivity() {
                 val downloadUri = uriTask.result
                 if (uriTask.isSuccessful) {
                     //video url is received successfully
+                    val storageImage = FirebaseStorage.getInstance().getReference(imagePathName)
+                    storageImage.putFile(photoURI!!)
+                        .addOnSuccessListener { info->
+                            val uriImage = info.storage.downloadUrl
+                            while (!uriImage.isSuccessful);
+                            val downloadImage=uriImage.result
+                            if(uriImage.isSuccessful){
+                                //now we can add video details to firebase db
+                                val hashMap = HashMap<String, Any>()
+                                hashMap["id"] = "$timestamp"
+                                hashMap["userId"] = "$uId"
+                                hashMap["title"] = "$title"
+                                hashMap["videoUri"] = "$downloadUri"
+                                hashMap["ImageUri"] = "$downloadImage"
+                                Log.d("data realtime : ", "${timestamp}, ${uId}, ${title} , ${downloadUri}")
+                                //put the above info to db
+                                val dbReference = FirebaseDatabase.getInstance().getReference("Videos")
+                                dbReference.child(timestamp)
+                                    .setValue(hashMap)
+                                    .addOnSuccessListener { taskSnapshot ->
+                                        //video info added successfully
+                                        progressDialog.dismiss()
+                                        Log.d("data realtime : ", "${timestamp}, ${title} , ${downloadUri}")
+                                        Toast.makeText(this,"Video Uploaded", Toast.LENGTH_SHORT).show()
+                                    }
+                                    .addOnFailureListener{ e ->
+                                        //failed adding video info
+                                        progressDialog.dismiss()
+                                        Log.d("Error", e.message.toString() )
+                                        Toast.makeText(this,"${e.message}", Toast.LENGTH_SHORT).show()
+                                    }
+                            }
+                        }
 
-                    //now we can add video details to firebase db
-                    val hashMap = HashMap<String, Any>()
-                    hashMap["id"] = "$timestamp"
-                    hashMap["userId"] = "$uId"
-                    hashMap["title"] = "$title"
-                    hashMap["videoUri"] = "$downloadUri"
-                    Log.d("data realtime : ", "${timestamp}, ${uId}, ${title} , ${downloadUri}")
-                    //put the above info to db
-                    val dbReference = FirebaseDatabase.getInstance().getReference("Videos")
-                    dbReference.child(timestamp)
-                        .setValue(hashMap)
-                        .addOnSuccessListener { taskSnapshot ->
-                            //video info added successfully
-                            progressDialog.dismiss()
-                            Log.d("data realtime : ", "${timestamp}, ${title} , ${downloadUri}")
-                            Toast.makeText(this,"Video Uploaded", Toast.LENGTH_SHORT).show()
-                        }
-                        .addOnFailureListener{ e ->
-                            //failed adding video info
-                            progressDialog.dismiss()
-                            Log.d("Error", e.message.toString() )
-                            Toast.makeText(this,"${e.message}", Toast.LENGTH_SHORT).show()
-                        }
                 }
             }
             .addOnFailureListener { e ->
@@ -271,10 +296,17 @@ class AddVideoActivity : AppCompatActivity() {
 
     }
     private fun imagePickGallery(){
+        imageGallery.launch(
+            com.github.drjacky.imagepicker.ImagePicker.with(this)
+                .crop()
+                .galleryOnly()
+                .maxResultSize(480,800,true)
+                .createIntent()
+        )
+//        val intent = Intent(Intent.ACTION_PICK)
+//        intent.type = "image/*"
+//        startActivityForResult(intent, REQUEST_CODE)
 
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        startActivityForResult(intent, REQUEST_CODE)
     }
 
 
@@ -307,12 +339,7 @@ class AddVideoActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
-        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE){
-            imgFood.setImageURI(data?.data) // handle chosen image
-
-        }
-        if (resultCode == AppCompatActivity.RESULT_OK){
+        if (resultCode == AppCompatActivity.RESULT_OK ){
             //video is picked from camera or gallery
             if (requestCode == VIDEO_PICK_CAMERA_CODE){
                 //video picked from camera
@@ -323,11 +350,9 @@ class AddVideoActivity : AppCompatActivity() {
                 //video picked from gallery
                 videoUri = data!!.data
                 setVideoToVideoView()
-            }else if (requestCode == REQUEST_CODE){
-                imgFood.setImageURI(data?.data) // handle chosen image
-                photoURI = data?.data!!
             }
         }
+
         else{
             //cancelled picking video
             Toast.makeText(this,"Cancelled", Toast.LENGTH_SHORT).show()
