@@ -8,14 +8,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.adl.fortunecooking.AddVideoActivity
 import com.adl.fortunecooking.DetailResepActivity
 import com.adl.fortunecooking.R
+import com.adl.fortunecooking.adapter.ResepAdapter
+import com.adl.fortunecooking.model.ResepModel
+import com.google.firebase.database.*
+import com.google.firebase.database.ktx.getValue
 import kotlinx.android.synthetic.main.fragment_account.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
+    lateinit var database: DatabaseReference
 
+    lateinit var lstDataResep : ArrayList<ResepModel>
+    lateinit var  resepAdapter: ResepAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,7 +42,30 @@ class HomeFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        database= FirebaseDatabase.getInstance().reference.child("Videos")
 
+        database.get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val snapshot = task.result
+                for (data in snapshot.children){
+                    val namaresep = snapshot.child("key").getValue(String::class.java)
+                    val imagelink = snapshot.child("value").getValue(String::class.java)
+                    Log.d("TAG", "nama: $namaresep\nimagelink: $imagelink")
+                }
+
+
+            } else {
+                Log.d("TAG", task.exception!!.message!!) //Don't ignore potential errors!
+            }
+        }
+        lstDataResep = ArrayList<ResepModel>()
+
+        resepAdapter = ResepAdapter(lstDataResep)
+
+        rvFood.apply {
+            layoutManager = LinearLayoutManager(activity)
+            adapter = resepAdapter
+        }
         addVideoFab.setOnClickListener({
             activity?.let{
                 val intent = Intent(it, AddVideoActivity::class.java)

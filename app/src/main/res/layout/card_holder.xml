@@ -28,8 +28,13 @@
         <RelativeLayout
             android:id="@+id/relativeBg"
             android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@drawable/food1">
+            android:layout_height="100dp">
+
+            <ImageView
+                android:id="@+id/imgResep"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:srcCompat="@drawable/food2" />
 
             <ImageButton
                 android:id="@+id/imageButton"
@@ -68,7 +73,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/txtResepName"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:gravity="center|top"
