@@ -41,7 +41,9 @@ class AddVideoActivity : AppCompatActivity() {
     private var videoUri: Uri? = null //uri of picked video
     lateinit var photoURI:Uri
     private var title:String = "";
-
+    private var resep:String = "";
+    private var step:String = "";
+    private var description:String = "";
 
     private val cameraLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -92,10 +94,21 @@ class AddVideoActivity : AppCompatActivity() {
         //handle click, upload video
         uploadVideoBtn.setOnClickListener {
             //get title
-            title = titleEt.text.toString().trim()
+            title = txtTitleResep.text.toString().trim()
+            resep = txtResep.text.toString().trim()
+            step = txtStep.text.toString().trim()
+            description = txtDescription.text.toString().trim()
             if (TextUtils.isEmpty(title)){
                 //no title is entered
                 Toast.makeText(this,"Title is required", Toast.LENGTH_SHORT).show()
+            }else if (TextUtils.isEmpty(resep)){
+                Toast.makeText(this,"Resep is required", Toast.LENGTH_SHORT).show()
+            }else if (TextUtils.isEmpty(step)){
+                Toast.makeText(this,"Langkah-langkah is required", Toast.LENGTH_SHORT).show()
+            }else if (TextUtils.isEmpty(description)){
+                Toast.makeText(this,"Deskripsi is required", Toast.LENGTH_SHORT).show()
+            }else if(photoURI == null){
+                Toast.makeText(this,"Pisck the image first", Toast.LENGTH_LONG).show()
             }
             else if (videoUri == null) {
                 //video is not picked
@@ -154,6 +167,9 @@ class AddVideoActivity : AppCompatActivity() {
                                 hashMap["title"] = "$title"
                                 hashMap["videoUri"] = "$downloadUri"
                                 hashMap["ImageUri"] = "$downloadImage"
+                                hashMap["Resep"] = "$resep"
+                                hashMap["Step"] = "$step"
+                                hashMap["Deskripsi"] = "$description"
                                 Log.d("data realtime : ", "${timestamp}, ${uId}, ${title} , ${downloadUri}")
                                 //put the above info to db
                                 val dbReference = FirebaseDatabase.getInstance().getReference("Videos")
@@ -227,14 +243,14 @@ class AddVideoActivity : AppCompatActivity() {
                 //handle item clicks
                 if (i==0) {
                     //camera clicked
-//                    if (!checkCameraPermissions()) {
-//                        //permissions was not allowed, request
-//                        requestCameraPermission()
-//                    }
-//                    else{
+                    if (!checkCameraPermissions()) {
+                        //permissions was not allowed, request
+                        requestCameraPermission()
+                    }
+                    else{
                         //permissions was allowed, pick video
                         videoPickCamera()
-
+                    }
                 }
                 else{
                     //gallery clicked
