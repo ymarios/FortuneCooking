@@ -227,14 +227,14 @@ class AddVideoActivity : AppCompatActivity() {
                 //handle item clicks
                 if (i==0) {
                     //camera clicked
-                    if (!checkCameraPermissions()) {
-                        //permissions was not allowed, request
-                        requestCameraPermission()
-                    }
-                    else{
+//                    if (!checkCameraPermissions()) {
+//                        //permissions was not allowed, request
+//                        requestCameraPermission()
+//                    }
+//                    else{
                         //permissions was allowed, pick video
                         videoPickCamera()
-                    }
+
                 }
                 else{
                     //gallery clicked
