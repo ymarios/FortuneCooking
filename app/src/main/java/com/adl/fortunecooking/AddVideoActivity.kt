@@ -94,8 +94,8 @@ class AddVideoActivity : AppCompatActivity() {
         //handle click, upload video
         uploadVideoBtn.setOnClickListener {
             //get title
-            title = txtTitleResep.text.toString().trim()
-            resep = txtResep.text.toString().trim()
+            title = titleEt.text.toString().trim()
+            resep = txtDescription.text.toString().trim()
             step = txtStep.text.toString().trim()
             description = txtDescription.text.toString().trim()
             if (TextUtils.isEmpty(title)){
@@ -108,7 +108,7 @@ class AddVideoActivity : AppCompatActivity() {
             }else if (TextUtils.isEmpty(description)){
                 Toast.makeText(this,"Deskripsi is required", Toast.LENGTH_SHORT).show()
             }else if(photoURI == null){
-                Toast.makeText(this,"Pisck the image first", Toast.LENGTH_LONG).show()
+                Toast.makeText(this,"Pick the image first", Toast.LENGTH_LONG).show()
             }
             else if (videoUri == null) {
                 //video is not picked
@@ -243,14 +243,14 @@ class AddVideoActivity : AppCompatActivity() {
                 //handle item clicks
                 if (i==0) {
                     //camera clicked
-//                    if (!checkCameraPermissions()) {
-//                        requestCameraPermission()
-//                    }
-//                    else{
+                    if (!checkCameraPermissions()) {
                         //permissions was not allowed, request
+                        requestCameraPermission()
+                    }
+                    else{
                         //permissions was allowed, pick video
                         videoPickCamera()
-                   // }
+                    }
                 }
                 else{
                     //gallery clicked
