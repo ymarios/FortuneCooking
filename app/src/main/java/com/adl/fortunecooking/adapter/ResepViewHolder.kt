@@ -18,13 +18,13 @@ class ResepViewHolder(view: View): RecyclerView.ViewHolder(view) {
     fun bindData(adapter:ResepAdapter, position:Int){
 
 
-        nameResep.setText(adapter.data.get(position)?.nama.toString())
+        nameResep.setText(adapter.data.get(position)?.title.toString())
         imageResep?.let {
             Glide.with(adapter.parent.context)
                 .asBitmap()
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)
-                .load(adapter.data.get(position).gambar)
+                .load(adapter.data.get(position).ImageUri)
                 .into(it)
         }
 

@@ -47,10 +47,14 @@ class HomeFragment : Fragment() {
         database.get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val snapshot = task.result
+                lstDataResep.clear()
                 for (data in snapshot.children){
-                    val namaresep = snapshot.child("key").getValue(String::class.java)
-                    val imagelink = snapshot.child("value").getValue(String::class.java)
-                    Log.d("TAG", "nama: $namaresep\nimagelink: $imagelink")
+                    val namaresep = data.child("title").getValue(String::class.java)
+                    val imagelink = data.child("ImageUri").getValue(String::class.java)
+                    lstDataResep.add( ResepModel(namaresep.toString() ,imagelink.toString()))
+                    resepAdapter.notifyDataSetChanged()
+
+                    Log.d("TAG", "nama: ${namaresep}\nimagelink: ${imagelink}")
                 }
 
 
