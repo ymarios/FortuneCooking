@@ -59,8 +59,9 @@ class HomeFragment : Fragment() {
                     val imagelink = data.child("ImageUri").getValue(String::class.java)
                     val videolink = data.child("videoUri").getValue(String::class.java)
                     val userUid = data.child("userId").getValue(String::class.java)
+                    val rating = data.child("rating").getValue(String::class.java)
                     val idVideo = data.child("id").getValue(String::class.java)
-                    lstDataResep.add( ResepModel(idVideo.toString(),namaresep.toString(),userUid.toString() ,imagelink.toString(), videolink.toString()))
+                    lstDataResep.add( ResepModel(idVideo.toString(),namaresep.toString(),userUid.toString() ,imagelink.toString(), videolink.toString(),rating.toString()))
                     resepAdapter.notifyDataSetChanged()
 
                     Log.d("TAG", "nama: ${namaresep}\nimagelink: ${imagelink}")

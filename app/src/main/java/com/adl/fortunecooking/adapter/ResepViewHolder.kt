@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.adl.fortunecooking.DetailResepActivity
@@ -15,6 +16,7 @@ class ResepViewHolder(view: View): RecyclerView.ViewHolder(view) {
     val nameResep = view.txtResepName
     val imageResep = view.imgResep
     val navigasi = view.cardResep
+    val rating = view.ratingBar
 
 
     fun bindData(adapter:ResepAdapter, position:Int){
@@ -29,6 +31,7 @@ class ResepViewHolder(view: View): RecyclerView.ViewHolder(view) {
                 .load(adapter.data.get(position).ImageUri)
                 .into(it)
         }
+        rating.setRating(adapter.data.get(position)?.rating.toFloat())
 
         navigasi.setOnClickListener{
             val intent = Intent(adapter.parent.context, DetailResepActivity::class.java)
@@ -36,6 +39,7 @@ class ResepViewHolder(view: View): RecyclerView.ViewHolder(view) {
             adapter.parent.context.startActivity(intent)
 
         }
+
 
     }
 }
