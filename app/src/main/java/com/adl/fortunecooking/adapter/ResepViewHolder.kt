@@ -31,6 +31,7 @@ class ResepViewHolder(view: View): RecyclerView.ViewHolder(view) {
                 .load(adapter.data.get(position).ImageUri)
                 .into(it)
         }
+
         rating.setRating(adapter.data.get(position)?.rating.toFloat())
 
         navigasi.setOnClickListener{

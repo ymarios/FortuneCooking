@@ -95,7 +95,7 @@ class AddVideoActivity : AppCompatActivity() {
         uploadVideoBtn.setOnClickListener {
             //get title
             title = titleEt.text.toString().trim()
-            resep = txtDescription.text.toString().trim()
+            resep = txtResep.text.toString().trim()
             step = txtStep.text.toString().trim()
             description = txtDescription.text.toString().trim()
             if (TextUtils.isEmpty(title)){
@@ -168,9 +168,9 @@ class AddVideoActivity : AppCompatActivity() {
                                 hashMap["videoUri"] = "$downloadUri"
                                 hashMap["ImageUri"] = "$downloadImage"
                                 hashMap["rating"] = "1"
-                                hashMap["Resep"] = "resep"
-                                hashMap["Step"] = "step"
-                                hashMap["Deskripsi"] = "description"
+                                hashMap["Resep"] = "$resep"
+                                hashMap["Step"] = "$step"
+                                hashMap["Deskripsi"] = "$description"
                                 Log.d("data realtime : ", "${timestamp}, ${uId}, ${title} , ${downloadUri}")
                                 //put the above info to db
                                 val dbReference = FirebaseDatabase.getInstance().getReference("Videos")

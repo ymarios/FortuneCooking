@@ -28,13 +28,13 @@
 
         <RelativeLayout
             android:id="@+id/relativeBg"
-            android:layout_width="100dp"
-            android:layout_height="100dp">
+            android:layout_width="130dp"
+            android:layout_height="130dp">
 
             <ImageView
                 android:id="@+id/imgResep"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 app:srcCompat="@drawable/food2" />
 
             <ImageButton

@@ -47,9 +47,18 @@ class HomeFragment : Fragment() {
         val user = Firebase.auth.currentUser
 
         txtUsername.setText("${user!!.displayName}")
-
         database= FirebaseDatabase.getInstance().reference.child("Videos")
+        LoadDataFirebase()
 
+        addVideoFab.setOnClickListener({
+            activity?.let{
+                val intent = Intent(it, AddVideoActivity::class.java)
+                it.startActivity(intent)
+            }
+        })
+    }
+
+    fun LoadDataFirebase(){
         database.get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val snapshot = task.result
@@ -61,11 +70,14 @@ class HomeFragment : Fragment() {
                     val userUid = data.child("userId").getValue(String::class.java)
                     val rating = data.child("rating").getValue(String::class.java)
                     val idVideo = data.child("id").getValue(String::class.java)
-                    lstDataResep.add( ResepModel(idVideo.toString(),namaresep.toString(),userUid.toString() ,imagelink.toString(), videolink.toString(),rating.toString()))
-                    resepAdapter.notifyDataSetChanged()
-
-                    Log.d("TAG", "nama: ${namaresep}\nimagelink: ${imagelink}")
+                    val desc = data.child("Deskripsi").getValue(String::class.java)
+                    val resep = data.child("Resep").getValue(String::class.java)
+                    val step = data.child("Step").getValue(String::class.java)
+                    lstDataResep.add( ResepModel(idVideo.toString(),namaresep.toString(),userUid.toString(),imagelink.toString(), videolink.toString(),rating.toString(),resep.toString(),step.toString(), desc.toString()))
+                    // Log.d("TAG", "nama: ${namaresep}\nimagelink: ${imagelink}")
                 }
+                resepAdapter.notifyDataSetChanged()
+
             } else {
                 Log.d("TAG", task.exception!!.message!!) //Don't ignore potential errors!
             }
@@ -75,15 +87,14 @@ class HomeFragment : Fragment() {
         resepAdapter = ResepAdapter(lstDataResep)
 
         rvFood.apply {
-            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
-
+            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,true)
             adapter = resepAdapter
         }
-        addVideoFab.setOnClickListener({
-            activity?.let{
-                val intent = Intent(it, AddVideoActivity::class.java)
-                it.startActivity(intent)
-            }
-        })
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        LoadDataFirebase()
     }
 }

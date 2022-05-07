@@ -10,7 +10,10 @@ data class ResepModel(
     var userId:String,
     var ImageUri:String,
     var videoUri:String,
-    var rating:String
+    var rating:String,
+    var Resep:String,
+    var Step:String,
+    var Deskripsi:String
 ):Parcelable
 //
 //@Parcelize

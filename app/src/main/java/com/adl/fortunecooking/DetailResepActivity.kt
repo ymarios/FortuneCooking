@@ -26,6 +26,11 @@ class DetailResepActivity : AppCompatActivity() {
                     .into(it)
             }
             txtNameDetail.setText(data.title)
+            txtDescriptionDetail.setText(data.Deskripsi)
+            txtResepDetail.setText(data.Resep)
+            txtStepDetail.setText(data.Step)
+            ratingDetail.setIsIndicator(true)
+            ratingDetail.setRating(data.rating.toFloat())
 
         }
         btnPlayVideo.setOnClickListener({

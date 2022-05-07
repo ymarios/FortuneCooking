@@ -58,8 +58,8 @@
                     android:orientation="horizontal">
 
                     <RatingBar
-                        android:id="@+id/ratingBar2"
-                        style="@style/Widget.AppCompat.RatingBar"
+                        android:id="@+id/ratingDetail"
+                        style="?android:attr/ratingBarStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
@@ -81,6 +81,14 @@
                     android:fontFamily="@font/roboto_bold"
                     android:text="Iga bakar mak nyus"
                     android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/txtDescriptionDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="TextView"
+                    android:textSize="16sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -98,13 +106,31 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:text="Resep" />
+                    android:fontFamily="@font/aleo_bold"
+                    android:text="Bahan :"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/txtResepDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:text="TextView" />
 
                 <TextView
                     android:id="@+id/textView14"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
+                    android:fontFamily="@font/aleo_bold"
+                    android:text="Langkah-langkah :"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/txtStepDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
                     android:text="TextView" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
