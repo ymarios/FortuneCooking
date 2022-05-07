@@ -49,15 +49,16 @@ class HomeFragment : Fragment() {
                 val snapshot = task.result
                 lstDataResep.clear()
                 for (data in snapshot.children){
-                    val namaresep = data.child("title").getValue(String::class.java)
+                    val namaresep= data.child("title").getValue(String::class.java)
                     val imagelink = data.child("ImageUri").getValue(String::class.java)
-                    lstDataResep.add( ResepModel(namaresep.toString() ,imagelink.toString()))
+                    val videolink = data.child("videoUri").getValue(String::class.java)
+                    val userUid = data.child("userId").getValue(String::class.java)
+                    val idVideo = data.child("id").getValue(String::class.java)
+                    lstDataResep.add( ResepModel(idVideo.toString(),namaresep.toString(),userUid.toString() ,imagelink.toString(), videolink.toString()))
                     resepAdapter.notifyDataSetChanged()
 
                     Log.d("TAG", "nama: ${namaresep}\nimagelink: ${imagelink}")
                 }
-
-
             } else {
                 Log.d("TAG", task.exception!!.message!!) //Don't ignore potential errors!
             }
@@ -67,7 +68,8 @@ class HomeFragment : Fragment() {
         resepAdapter = ResepAdapter(lstDataResep)
 
         rvFood.apply {
-            layoutManager = LinearLayoutManager(activity)
+            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
+
             adapter = resepAdapter
         }
         addVideoFab.setOnClickListener({

@@ -19,8 +19,17 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/food2">
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imgFoodDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="0dp"
+                    app:srcCompat="@drawable/food2" />
 
                 <androidx.constraintlayout.utils.widget.ImageFilterButton
                     android:id="@+id/imageFilterButton"
@@ -66,7 +75,7 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/textView12"
+                    android:id="@+id/txtNameDetail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_bold"

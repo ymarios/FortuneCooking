@@ -48,10 +48,7 @@ class AccountFragment : Fragment() {
         })
 
         btnEditProfil.setOnClickListener({
-            activity?.let{
-                val intent = Intent(it, DetailResepActivity::class.java)
-                it.startActivity(intent)
-            }
+
         })
     }
 
