@@ -12,6 +12,8 @@ import com.adl.fortunecooking.fragments.AccountFragment
 import com.adl.fortunecooking.fragments.FavoritesFragment
 import com.adl.fortunecooking.fragments.HomeFragment
 import com.adl.fortunecooking.fragments.SearchFragment
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_home.*
 
 class DashboardActivity : AppCompatActivity() {
@@ -23,6 +25,7 @@ class DashboardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
+
         setFullscreen()
 
 

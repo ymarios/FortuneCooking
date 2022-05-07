@@ -1,0 +1,258 @@
+[33mcommit ddae2cd31054150945c48a39d6ae9aa2ad1a5b42[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: arvsyam <arivasyam31@gmail.com>
+Date:   Fri Apr 29 01:07:05 2022 +0700
+
+    fix fragment
+
+[33mcommit a3375a327da3b2c695788f16d61be52a11067506[m
+Author: ymarios <yosefmariosupadman@gmail.com>
+Date:   Thu Apr 28 00:31:25 2022 +0700
+
+    Fragment masih Error
+
+[33mcommit 12a8a3e48d1d968a902522455818cf6c434f0f58[m
+Merge: 51d15de ea68cd8
+Author: RobbyRaffly <robbyaraffly12@gmail.com>
+Date:   Thu Apr 28 00:03:51 2022 +0700
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       .idea/misc.xml
+    #       app/src/main/res/layout/activity_dashboard.xml
+
+[33mcommit 51d15deb7fb5c3259781fb61151615fa2895577b[m
+Author: RobbyRaffly <robbyaraffly12@gmail.com>
+Date:   Thu Apr 28 00:03:37 2022 +0700
+
+    icon app
+
+[33mcommit 1fdf657774563fd29c02e2375c77e17a004d34b5[m
+Author: RobbyRaffly <robbyaraffly12@gmail.com>
+Date:   Thu Apr 28 00:01:56 2022 +0700
+
+    icon app
+
+[33mcommit ea68cd87684966bcc972dd0d21fd60ccdd16d370[m
+Author: arvsyam <arivasyam31@gmail.com>
+Date:   Wed Apr 27 23:57:21 2022 +0700
+
+    card view style
+
+[33mcommit e3eb202f9946893dfe20b2df81d9811a4a0f7dcc[m
+Merge: 69586e5 362dabb
+Author: arvsyam <arivasyam31@gmail.com>
+Date:   Wed Apr 27 23:26:52 2022 +0700
+
+    Merge branch 'master' of https://github.com/ymarios/FortuneCooking
+    
+     Conflicts:
+    	.idea/misc.xml
+    	app/src/main/res/layout/card_holder.xml
+
+[33mcommit 69586e58efa57e79855c5678c1e21c37cb6d442a[m
+Author: arvsyam <arivasyam31@gmail.com>
+Date:   Wed Apr 27 23:25:46 2022 +0700
+
+    card view layout
+
+[33mcommit 362dabbb40f90cca3c5a9ea316f383975422a958[m
+Author: RobbyRaffly <robbyaraffly12@gmail.com>
+Date:   Wed Apr 27 23:23:44 2022 +0700
+
+    add favorite icon
+
+[33mcommit a983865e365223c17e527a001844a06a17d11da5[m
+Merge: 5c8d086 80cb946
+Author: arvsyam <arivasyam31@gmail.com>
+Date:   Wed Apr 27 22:45:26 2022 +0700
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 5c8d0865822b712be65901f71df543ab2a1e9129[m
+Author: arvsyam <arivasyam31@gmail.com>
+Date:   Wed Apr 27 22:44:29 2022 +0700
+
+    add card view
+
+[33mcommit 80cb9469004351aa958eab05428a3206e3c561f2[m
+Author: RobbyRaffly <robbyaraffly12@gmail.com>
+Date:   Wed Apr 27 22:42:01 2022 +0700
+
+    shared preferences
+
+[33mcommit d7ce639f6a35e030ea22eed2713893d7dc41b7bc[m
+Author: ymarios <yosefmariosupadman@gmail.com>
+Date:   Wed Apr 27 21:24:07 2022 +0700
+
+    Login/Register Firebase
+
+[33mcommit e9ae9a0ee8e27b8fe5f1a37efb336688bbb1c2e2[m
+Author: ymarios <yosefmariosupadman@gmail.com>
+Date:   Wed Apr 27 21:22:46 2022 +0700
+
+    Login/Register Firebase
+
+[33mcommit 7a4cc436b7701eda3af990cc4579891d00d68279[m
+Author: arvsyam <arivasyam31@gmail.com>
+Date:   Sun Apr 24 23:14:48 2022 +0700
+
+    add home layout
+
+[33mcommit 2229446b0f5bce2c2f8a7e15635f1f3b29c7f678[m
+Merge: 3c703c7 9c23bf4
+Author: arvsyam <arivasyam31@gmail.com>
+Date:   Sun Apr 24 22:41:27 2022 +0700
+
+    add home layout
+
+[33mcommit 3c703c7d725b480f881f1b622a1ca7582df4deab[m
+Author: arvsyam <arivasyam31@gmail.com>
+Date:   Sun Apr 24 22:24:47 2022 +0700
+
+    add home layout
+
+[33mcommit ff0a3c3341003da77b7d59738a2261d507db8651[m
+Author: arvsyam <arivasyam31@gmail.com>
+Date:   Sun Apr 24 22:24:23 2022 +0700
+
+    add home layout
+
+[33mcommit 9c23bf4d620ee6122983db877c4c7f57cc943c08[m
+Author: ymarios <yosefmariosupadman@gmail.com>
+Date:   Sun Apr 24 10:50:35 2022 +0700
+
+    Register
+
+[33mcommit 2afc95ebda3a87d48294e8172e579b804950e7cb[m
+Author: ymarios <yosefmariosupadman@gmail.com>
+Date:   Sun Apr 24 00:23:01 2022 +0700
+
+    Register
+
+[33mcommit ff0da9662bb26c787986a6e5bbb19f7dee03fc81[m
+Merge: 06e3998 33eb483
+Author: ymarios <yosefmariosupadman@gmail.com>
+Date:   Sun Apr 24 00:22:16 2022 +0700
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 06e3998327cbe004044840b4c5e1084a6e45163f[m
+Author: ymarios <yosefmariosupadman@gmail.com>
+Date:   Sun Apr 24 00:22:03 2022 +0700
+
+    Register
+
+[33mcommit 33eb483ad860c69a822d29cd0723e10380d794a5[m
+Author: RobbyRaffly <robbyaraffly12@gmail.com>
+Date:   Sun Apr 24 00:13:24 2022 +0700
+
+    Login image
+
+[33mcommit 66b0c4197a09fa0493527b9a0df8b04dba18b311[m
+Author: RobbyRaffly <robbyaraffly12@gmail.com>
+Date:   Sun Apr 24 00:13:12 2022 +0700
+
+    Login image
+
+[33mcommit 9518dec3c0855b7bea1342d640239891d519d721[m
+Author: ymarios <yosefmariosupadman@gmail.com>
+Date:   Sun Apr 24 00:03:10 2022 +0700
+
+    Register
+
+[33mcommit 2d15aa339f200507ab863986e4f26c8f94f0e451[m
+Merge: 8d4fff7 28c222e
+Author: ymarios <yosefmariosupadman@gmail.com>
+Date:   Sat Apr 23 23:53:42 2022 +0700
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 28c222e2addaf6a72bbaae551fd9e8c2b57cce11[m
+Author: Robby Aldriyanto Raffly <62589286+RobbyRaffly@users.noreply.github.com>
+Date:   Sat Apr 23 23:51:07 2022 +0700
+
+    Delete backgroundImage_Login.jpg
+
+[33mcommit 8d4fff76c831f3e4c34fc5c09470b5e95e9c2565[m
+Merge: 616b9a7 50bdee9
+Author: ymarios <yosefmariosupadman@gmail.com>
+Date:   Sat Apr 23 23:50:51 2022 +0700
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 616b9a722948f98619a5e78a8386a9280d7f0a32[m
+Author: ymarios <yosefmariosupadman@gmail.com>
+Date:   Sat Apr 23 23:50:39 2022 +0700
+
+    Register
+
+[33mcommit 50bdee994de0337accc97d5c73d2e74d252e8dd1[m
+Author: RobbyRaffly <robbyaraffly12@gmail.com>
+Date:   Sat Apr 23 23:33:18 2022 +0700
+
+    Login
+
+[33mcommit f864363021e9ac5b0d38728bba485d108d3c61e1[m
+Merge: 246fd96 cebbb1e
+Author: RobbyRaffly <robbyaraffly12@gmail.com>
+Date:   Sat Apr 23 23:31:00 2022 +0700
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       .idea/misc.xml
+
+[33mcommit 246fd96a10f1dc4f4bba5f71483627ee3ad3a818[m
+Author: RobbyRaffly <robbyaraffly12@gmail.com>
+Date:   Sat Apr 23 23:29:23 2022 +0700
+
+    Login
+
+[33mcommit 3752f14ffff2af1ac02f5d6f1eadbe5503ad96c6[m
+Author: ymarios <yosefmariosupadman@gmail.com>
+Date:   Sat Apr 23 23:11:34 2022 +0700
+
+    drawable register
+
+[33mcommit cebbb1ed303b0cef94cd114043ff006e4f1473b3[m
+Author: ymarios <yosefmariosupadman@gmail.com>
+Date:   Sat Apr 23 23:10:25 2022 +0700
+
+    drawable register
+
+[33mcommit e9d793f24a92f8c4121eddd4786b82d9259f5e5f[m
+Author: arvsyam <arivasyam31@gmail.com>
+Date:   Sat Apr 23 22:31:44 2022 +0700
+
+    fix splash screen
+
+[33mcommit d77a569558bd08f3824f2e6603e237807a05e0cb[m
+Author: ymarios <yosefmariosupadman@gmail.com>
+Date:   Sat Apr 23 22:25:41 2022 +0700
+
+    tes komen
+
+[33mcommit 366bdc1b2c9bd1db233d0915bdc4212b3306b944[m
+Author: RobbyRaffly <robbyaraffly12@gmail.com>
+Date:   Sat Apr 23 22:21:17 2022 +0700
+
+    color template
+
+[33mcommit 32183c0fbb97cb6442506c6095d1e19ad85033e9[m
+Author: arvsyam <arivasyam31@gmail.com>
+Date:   Sat Apr 23 16:12:04 2022 +0700
+
+    fix splash screen
+
+[33mcommit 4d9a757d7ce407f58ab9a52e267796abf442f6f4[m
+Author: arvsyam <arivasyam31@gmail.com>
+Date:   Sat Apr 23 14:52:07 2022 +0700
+
+    fix splash screen
+
+[33mcommit a796293cc76e1e30702b2b8316f870c90575fb8c[m
+Author: ymarios <yosefmariosupadman@gmail.com>
+Date:   Wed Apr 20 23:52:53 2022 +0700
+
+    Splash Screen

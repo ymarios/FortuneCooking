@@ -45,7 +45,7 @@
                     android:typeface="normal" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/txtUsername"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"

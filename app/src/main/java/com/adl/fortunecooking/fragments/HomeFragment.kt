@@ -14,8 +14,10 @@ import com.adl.fortunecooking.DetailResepActivity
 import com.adl.fortunecooking.R
 import com.adl.fortunecooking.adapter.ResepAdapter
 import com.adl.fortunecooking.model.ResepModel
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_account.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -42,6 +44,10 @@ class HomeFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        val user = Firebase.auth.currentUser
+
+        txtUsername.setText("${user!!.displayName}")
+
         database= FirebaseDatabase.getInstance().reference.child("Videos")
 
         database.get().addOnCompleteListener { task ->
