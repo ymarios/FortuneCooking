@@ -87,7 +87,7 @@ class SearchFragment : Fragment() {
             if (pattern.containsMatchIn(dataresep.title)) {
                 println("${dataresep.title} matches")
                 val resep:String=dataresep.title.toString()
-                Toast.makeText(activity,"${dataresep.title} matches",Toast.LENGTH_LONG).show()
+                //Toast.makeText(activity,"${dataresep.title} matches",Toast.LENGTH_LONG).show()
                 lstSearch.add( ResepModel(dataresep.id,dataresep.title,dataresep.userId,dataresep.ImageUri,dataresep.videoUri,dataresep.rating,dataresep.Resep,dataresep.Step, dataresep.Deskripsi))
             }
         }
