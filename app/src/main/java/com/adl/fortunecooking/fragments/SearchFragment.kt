@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adl.fortunecooking.R
 import com.adl.fortunecooking.adapter.ResepAdapter
+import com.adl.fortunecooking.adapter.SearchAdapter
 import com.adl.fortunecooking.model.ResepModel
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_search.*
@@ -18,9 +19,10 @@ class SearchFragment : Fragment() {
 
     lateinit var database: DatabaseReference
     lateinit var  resepAdapter: ResepAdapter
-
+    lateinit var searchAdapter:SearchAdapter
     lateinit var lstDataResep : ArrayList<ResepModel>
-
+    lateinit var lstSearch:ArrayList<ResepModel>
+    lateinit var searchString:String
 
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)
@@ -40,46 +42,61 @@ class SearchFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         lstDataResep = ArrayList<ResepModel>()
-        resepAdapter = ResepAdapter(lstDataResep)
+        lstSearch = ArrayList<ResepModel>()
+        //resepAdapter = ResepAdapter(lstDataResep)
+        searchAdapter = SearchAdapter(lstSearch)
 
-        val pattern = "donat".toRegex((RegexOption.IGNORE_CASE))
+
         database= FirebaseDatabase.getInstance().reference.child("Videos")
-        database.get().addOnCompleteListener{ task ->
-            if (task.isSuccessful) {
-                val snapshot = task.result
-                lstDataResep.clear()
-                for (data in snapshot.children){
-                    val namaresep= data.child("title").getValue(String::class.java)
-                    val imagelink = data.child("ImageUri").getValue(String::class.java)
-                    val videolink = data.child("videoUri").getValue(String::class.java)
-                    val userUid = data.child("userId").getValue(String::class.java)
-                    val rating = data.child("rating").getValue(String::class.java)
-                    val idVideo = data.child("id").getValue(String::class.java)
-                    val desc = data.child("Deskripsi").getValue(String::class.java)
-                    val resep = data.child("Resep").getValue(String::class.java)
-                    val step = data.child("Step").getValue(String::class.java)
 
-                    lstDataResep.add( ResepModel(idVideo.toString(),namaresep.toString(),userUid.toString(),imagelink.toString(), videolink.toString(),rating.toString(),resep.toString(),step.toString(), desc.toString()))
-                    // Log.d("TAG", "nama: ${namaresep}\nimagelink: ${imagelink}")
-                }
+        btnSearch.setOnClickListener{
+            searchString = txtSearch.text.toString()
+            database.get().addOnCompleteListener{ task ->
+                if (task.isSuccessful) {
+                    val snapshot = task.result
+                    lstDataResep.clear()
+                    for (data in snapshot.children){
+                        val namaresep= data.child("title").getValue(String::class.java)
+                        val imagelink = data.child("ImageUri").getValue(String::class.java)
+                        val videolink = data.child("videoUri").getValue(String::class.java)
+                        val userUid = data.child("userId").getValue(String::class.java)
+                        val rating = data.child("rating").getValue(String::class.java)
+                        val idVideo = data.child("id").getValue(String::class.java)
+                        val desc = data.child("Deskripsi").getValue(String::class.java)
+                        val resep = data.child("Resep").getValue(String::class.java)
+                        val step = data.child("Step").getValue(String::class.java)
 
-                resepAdapter.notifyDataSetChanged()
-
-                for(dataresep in lstDataResep){
-                    if (pattern.containsMatchIn(dataresep.title)) {
-                        println("${dataresep.title} matches")
-                        val resep:String=dataresep.title.toString()
-                        Toast.makeText(activity,"${dataresep.title} matches",Toast.LENGTH_LONG).show()
-                       // lstDataResep.add( ResepModel(dataresep.id,dataresep.title,dataresep.userId,dataresep.ImageUri,dataresep.videoUri,dataresep.rating,dataresep.Resep,dataresep.Step, dataresep.Deskripsi))
+                        lstDataResep.add( ResepModel(idVideo.toString(),namaresep.toString(),userUid.toString(),imagelink.toString(), videolink.toString(),rating.toString(),resep.toString(),step.toString(), desc.toString()))
+                        // Log.d("TAG", "nama: ${namaresep}\nimagelink: ${imagelink}")
                     }
+                    // resepAdapter.notifyDataSetChanged()
+                    Search(lstDataResep)
+                } else {
+                    Log.d("TAG", task.exception!!.message!!) //Don't ignore potential errors!
                 }
-
-
-            } else {
-                Log.d("TAG", task.exception!!.message!!) //Don't ignore potential errors!
             }
         }
 
+
+    }
+
+    fun Search(list:ArrayList<ResepModel>){
+        val pattern = searchString.toRegex((RegexOption.IGNORE_CASE))
+        lstSearch.clear()
+        for(dataresep in list){
+            if (pattern.containsMatchIn(dataresep.title)) {
+                println("${dataresep.title} matches")
+                val resep:String=dataresep.title.toString()
+                Toast.makeText(activity,"${dataresep.title} matches",Toast.LENGTH_LONG).show()
+                lstSearch.add( ResepModel(dataresep.id,dataresep.title,dataresep.userId,dataresep.ImageUri,dataresep.videoUri,dataresep.rating,dataresep.Resep,dataresep.Step, dataresep.Deskripsi))
+            }
+        }
+        searchAdapter.notifyDataSetChanged()
+
+        rcycSearch.apply {
+            layoutManager=LinearLayoutManager(activity)
+            adapter=searchAdapter
+        }
     }
 
 
