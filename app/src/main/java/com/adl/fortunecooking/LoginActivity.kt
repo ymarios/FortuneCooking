@@ -1,28 +1,42 @@
 package com.adl.fortunecooking
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_register.*
 
-lateinit var uId:String
 class LoginActivity : AppCompatActivity() {
 
-    lateinit var auth : FirebaseAuth
+    private lateinit var firebaseAuth : FirebaseAuth
 
+    private lateinit var progressDialog : ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        auth = FirebaseAuth.getInstance()
+
+        firebaseAuth = FirebaseAuth.getInstance()
+
+        //init progress dialog, will show while login account
+        progressDialog = ProgressDialog(this)
+        progressDialog.setTitle("Please wait")
+        progressDialog.setCanceledOnTouchOutside(false)
 
         val sharedPreference = getSharedPreferences("login", MODE_PRIVATE)
         val username = sharedPreference.getString("username","")
         val password = sharedPreference.getString("password","")
-        val Checked = sharedPreference.getBoolean("checbox", false)
+        val Checked = sharedPreference.getBoolean("checkbox", false)
 
         txtEmail.setText(username)
         txtPassword.setText(password)
@@ -48,26 +62,82 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         })
     }
+    private var email = ""
+    private var password = ""
 
     private fun login() {
-       if(!txtEmail.text.toString().isEmpty() || !txtPassword.text.toString().isEmpty()){
-            auth.signInWithEmailAndPassword(txtEmail.text.toString(),txtPassword.text.toString()).addOnCompleteListener {
-                    it ->
-                if(it.isSuccessful){
-                    val currentFirebaseUser = FirebaseAuth.getInstance().currentUser
-                    Log.d("User sekarang :", "${currentFirebaseUser!!.uid}" )
-                    uId = currentFirebaseUser.uid
-                    val intent = Intent(this,DashboardActivity::class.java)
-                    startActivity(intent)
-                }
-            }.addOnFailureListener{
-                    exception -> Toast.makeText(applicationContext, exception.localizedMessage, Toast.LENGTH_LONG).show()
-            }
-        }else{
-            Toast.makeText(this,"email or password required",Toast.LENGTH_SHORT).show()
+       //1) Input Data
+        email = txtEmail.text.toString().trim()
+        password = txtPassword.text.toString().trim()
+
+        //2)Validate Data
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            Toast.makeText(this,"Invalid email format...", Toast.LENGTH_SHORT).show()
+        }
+        else if (password.isEmpty()){
+            Toast.makeText(this,"Enter password...", Toast.LENGTH_SHORT).show()
+        }
+        else {
+            loginuser()
         }
 
     }
+
+    private fun loginuser() {
+        //3) Login - Firebase Auth
+
+        //show progress
+        progressDialog.setMessage("Logging In...")
+        progressDialog.show()
+
+        val firebaseUser = firebaseAuth.currentUser
+
+        firebaseAuth.signInWithEmailAndPassword(email, password)
+            .addOnSuccessListener {
+                //Login success
+                val ref = FirebaseDatabase.getInstance().getReference("Users")
+                ref.child(firebaseUser!!.uid)
+                startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
+                finish()
+            }
+            .addOnFailureListener { e->
+                //failed login
+                progressDialog.dismiss()
+                Toast.makeText(this,"Login failed due to ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+//    private fun checkUser() {
+//        //4) Check user type - Firebase Auth
+//
+//        progressDialog.setMessage("Checking User...")
+//
+//        val firebaseUser = firebaseAuth.currentUser
+//
+//        val ref = FirebaseDatabase.getInstance().getReference("Users")
+//        ref.child(firebaseUser!!.uid)
+//            .addListenerForSingleValueEvent(object : ValueEventListener{
+//                override fun onCancelled(error: DatabaseError) {
+//                }
+//
+//                override fun onDataChange(snapshot: DataSnapshot) {
+//                    progressDialog.dismiss()
+//
+//                    //get user type e.g. user/admin
+//                    val userType = snapshot.child("").value
+//                    if(userType == "user"){
+//                        //its simple user, open user dashboard
+//                        startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
+//                        finish()
+//                    }
+//                    else if (userType == "admin"){
+//                        //its admin, open admin dashboard
+//                        startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
+//                        finish()
+//                    }
+//                }
+//            })
+//    }
 
 
 }

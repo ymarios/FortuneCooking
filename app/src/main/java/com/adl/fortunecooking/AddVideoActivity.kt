@@ -163,7 +163,6 @@ class AddVideoActivity : AppCompatActivity() {
                                 //now we can add video details to firebase db
                                 val hashMap = HashMap<String, Any>()
                                 hashMap["id"] = "$timestamp"
-                                hashMap["userId"] = "$uId"
                                 hashMap["title"] = "$title"
                                 hashMap["videoUri"] = "$downloadUri"
                                 hashMap["ImageUri"] = "$downloadImage"
@@ -171,7 +170,7 @@ class AddVideoActivity : AppCompatActivity() {
                                 hashMap["Resep"] = "$resep"
                                 hashMap["Step"] = "$step"
                                 hashMap["Deskripsi"] = "$description"
-                                Log.d("data realtime : ", "${timestamp}, ${uId}, ${title} , ${downloadUri}")
+                                Log.d("data realtime : ", "${timestamp}, ${title} , ${downloadUri}")
                                 //put the above info to db
                                 val dbReference = FirebaseDatabase.getInstance().getReference("Videos")
                                 dbReference.child(timestamp)

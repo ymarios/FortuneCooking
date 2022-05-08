@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
     id 'kotlin-android-extensions'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -87,6 +88,9 @@ dependencies {
 
 //imagepicker
 dependencies {
+
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.2.10'
+    implementation 'com.google.firebase:firebase-analytics-ktx:21.0.0'
     implementation 'com.github.Drjacky:ImagePicker:2.1.15'
 
 }

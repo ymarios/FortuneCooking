@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
     lateinit var database: DatabaseReference
-    lateinit var  resepAdapter: ResepAdapter
+    lateinit var resepAdapter: ResepAdapter
 
     lateinit var lstDataResep : ArrayList<ResepModel>
     override fun onCreateView(

@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_search.*
 class SearchFragment : Fragment() {
 
     lateinit var database: DatabaseReference
-    lateinit var  resepAdapter: ResepAdapter
+    lateinit var resepAdapter: ResepAdapter
     lateinit var searchAdapter:SearchAdapter
     lateinit var lstDataResep : ArrayList<ResepModel>
     lateinit var lstSearch:ArrayList<ResepModel>
