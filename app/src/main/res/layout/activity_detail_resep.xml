@@ -57,18 +57,19 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
-                    <RatingBar
-                        android:id="@+id/ratingDetail"
-                        style="?android:attr/ratingBarStyle"
+                    <Button
+                        android:id="@+id/btn_set_rating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        android:numStars="5" />
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:text="beri rating" />
 
                     <Button
                         android:id="@+id/btnPlayVideo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:layout_weight="1"
                         android:drawableLeft="@android:drawable/ic_media_play"
                         android:text="Play Video" />
@@ -89,6 +90,7 @@
                     android:layout_margin="5dp"
                     android:text="TextView"
                     android:textSize="16sp" />
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
