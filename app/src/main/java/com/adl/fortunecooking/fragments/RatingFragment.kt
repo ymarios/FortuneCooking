@@ -1,12 +1,15 @@
 package com.adl.fortunecooking.fragments
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.adl.fortunecooking.R
+import kotlinx.android.synthetic.main.fragment_rating.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -57,5 +60,13 @@ class RatingFragment : DialogFragment(){
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        btn_submit_rate.setOnClickListener({
+            val rateVal = rate_video.getRating()
+            Log.d("rateIS =","${rateVal}")
+        })
     }
 }

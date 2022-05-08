@@ -40,7 +40,6 @@ class DetailResepActivity : AppCompatActivity() {
             txtResepDetail.setText(data.Resep)
             txtStepDetail.setText(data.Step)
 
-
         }
         btnPlayVideo.setOnClickListener({
             val intent = Intent(this@DetailResepActivity, PlayVideo::class.java)
@@ -77,8 +76,5 @@ class DetailResepActivity : AppCompatActivity() {
 
     }
 
-    fun insertRate(id:String){
-
-    }
 
 }
