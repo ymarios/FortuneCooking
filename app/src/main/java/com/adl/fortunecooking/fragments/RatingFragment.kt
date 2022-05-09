@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.adl.fortunecooking.R
+import com.adl.fortunecooking.model.ResepModel
 import kotlinx.android.synthetic.main.fragment_rating.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -39,6 +40,7 @@ class RatingFragment : DialogFragment(){
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_rating, container, false)
     }
 
@@ -64,9 +66,14 @@ class RatingFragment : DialogFragment(){
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         btn_submit_rate.setOnClickListener({
             val rateVal = rate_video.getRating()
-            Log.d("rateIS =","${rateVal}")
+            val bundle = arguments
+            val model: ResepModel? =bundle?.getParcelable("data")
+            Log.d("rateIS =","resep = ${model?.title} + user = ${model?.userId} + rate = ${rateVal}")
         })
+
+
     }
 }

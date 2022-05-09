@@ -1,7 +1,6 @@
 package com.adl.fortunecooking
 
 import android.app.Dialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.adl.fortunecooking.fragments.RatingFragment
-
 import com.adl.fortunecooking.model.ResepModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -38,7 +36,9 @@ class DetailResepActivity : AppCompatActivity() {
             txtNameDetail.setText(data.title)
             txtDescriptionDetail.setText(data.Deskripsi)
             txtResepDetail.setText(data.Resep)
-            txtStepDetail.setText(data.Step)
+            txtStepDetail.setText(data.id)
+
+
 
         }
         btnPlayVideo.setOnClickListener({
@@ -48,6 +48,19 @@ class DetailResepActivity : AppCompatActivity() {
         })
 
         btn_set_rating.setOnClickListener({
+            var arguments = Bundle()
+            arguments.putParcelable("data",data);
+            var myFragment: Fragment = com.adl.fortunecooking.fragments.RatingFragment()
+            myFragment.setArguments(arguments);
+
+//            val bundle = Bundle()
+//            bundle.putParcelable("data", data)
+//            // set Fragmentclass Arguments
+//            // set Fragmentclass Arguments
+//            val fragobj = RatingFragment()
+//            fragobj.setArguments(bundle)
+//            Log.d("bundle","${bundle}")
+
             showDialog()
         })
 
