@@ -8,10 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.adl.fortunecooking.DetailResepActivity
-import com.adl.fortunecooking.LoginActivity
-import com.adl.fortunecooking.ProfileEditActivity
-import com.adl.fortunecooking.R
+import com.adl.fortunecooking.*
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -65,6 +62,13 @@ class AccountFragment : Fragment() {
                 val intent = Intent(it, ProfileEditActivity::class.java)
                 it.startActivity(intent)
                 }
+        })
+
+        btnMyVideos.setOnClickListener({
+            activity?.let{
+                val intent = Intent(it, MyVideos::class.java)
+                it.startActivity(intent)
+            }
         })
     }
 

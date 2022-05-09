@@ -177,6 +177,8 @@ class RegisterActivity : AppCompatActivity() {
                 //user info saved, open user dashboard
                 progressDialog.dismiss()
                 Toast.makeText(this,"Account created...", Toast.LENGTH_SHORT).show()
+
+
                 startActivity(Intent(this@RegisterActivity, DashboardActivity::class.java))
                 finish()
             }

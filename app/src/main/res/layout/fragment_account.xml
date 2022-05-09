@@ -69,6 +69,12 @@
         android:text="Edit profil" />
 
     <Button
+        android:id="@+id/btnMyVideos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="My Videos" />
+
+    <Button
         android:id="@+id/btnLogOut"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
