@@ -18,7 +18,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_add_video.*
 
@@ -137,6 +139,7 @@ class AddVideoActivity : AppCompatActivity() {
     private fun uploadVideoFirebase() {
         //show progress
         progressDialog.show()
+        val user = Firebase.auth.currentUser
 
         //timestamp
         val timestamp = ""+System.currentTimeMillis()
