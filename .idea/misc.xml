@@ -27,9 +27,10 @@
         <entry key="..\:/FortuneCooking/app/src/main/res/layout/activity_login.xml" value="0.18" />
         <entry key="..\:/FortuneCooking/app/src/main/res/layout/activity_main.xml" value="0.15" />
         <entry key="..\:/FortuneCooking/app/src/main/res/layout/activity_play_video.xml" value="0.1" />
-        <entry key="..\:/FortuneCooking/app/src/main/res/layout/activity_register.xml" value="0.25" />
+        <entry key="..\:/FortuneCooking/app/src/main/res/layout/activity_profile_edit.xml" value="0.25" />
+        <entry key="..\:/FortuneCooking/app/src/main/res/layout/activity_register.xml" value="0.1" />
         <entry key="..\:/FortuneCooking/app/src/main/res/layout/card_holder.xml" value="0.22" />
-        <entry key="..\:/FortuneCooking/app/src/main/res/layout/fragment_account.xml" value="0.1" />
+        <entry key="..\:/FortuneCooking/app/src/main/res/layout/fragment_account.xml" value="0.22" />
         <entry key="..\:/FortuneCooking/app/src/main/res/layout/fragment_favorites.xml" value="0.15" />
         <entry key="..\:/FortuneCooking/app/src/main/res/layout/fragment_home.xml" value="0.12681159420289856" />
         <entry key="..\:/FortuneCooking/app/src/main/res/layout/fragment_search.xml" value="0.1634963768115942" />

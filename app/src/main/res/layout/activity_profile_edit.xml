@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,10 +5,18 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".fragments.AccountFragment">
+    tools:context=".ProfileEditActivity">
 
-    <!-- TODO: Update blank fragment layout -->
-
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="Edit Profile"
+        android:textColor="@color/temp_Kuning_layu"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="150dp"
@@ -19,7 +26,7 @@
         android:foregroundGravity="center_vertical|center|center_horizontal">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imgProfile"
+            android:id="@+id/profilePhoto"
             android:layout_width="125dp"
             android:layout_height="125dp"
             android:layout_gravity="center"
@@ -34,43 +41,33 @@
         android:layout_margin="5dp"
         app:cardCornerRadius="20dp">
 
-        <TextView
-            android:id="@+id/txtNamaAcc"
+        <EditText
+            android:id="@+id/txtNamaAccEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="5dp"
             android:fontFamily="@font/carter_one"
             android:text="Name"
-            android:textSize="16sp" />
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="5dp"
-        app:cardCornerRadius="20dp">
-
-        <TextView
-            android:id="@+id/txtEmailAcc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:fontFamily="@font/carter_one"
-            android:text="Email"
+            android:drawableLeft="@drawable/ic_person_gray"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:ems="10"
             android:textSize="16sp" />
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/btnEditProfil"
-        android:layout_width="match_parent"
+        android:id="@+id/btnUpdateEdit"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="Edit profil" />
+        android:layout_marginTop="10dp"
+        android:text="Update" />
 
     <Button
-        android:id="@+id/btnLogOut"
-        android:layout_width="match_parent"
+        android:id="@+id/btnBackEdit"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="Log Out" />
+        android:layout_marginTop="10dp"
+        android:text="Back" />
+
 </LinearLayout>
