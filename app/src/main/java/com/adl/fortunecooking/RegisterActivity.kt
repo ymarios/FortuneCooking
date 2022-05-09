@@ -179,7 +179,6 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(this,"Account created...", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this@RegisterActivity, DashboardActivity::class.java))
                 finish()
-
             }
             .addOnFailureListener { e->
                 //failed adding data to db

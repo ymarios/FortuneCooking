@@ -17,6 +17,7 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_add_video.*
@@ -25,6 +26,8 @@ class AddVideoActivity : AppCompatActivity() {
 
     //actionbar
     private lateinit var actionBar: ActionBar
+
+    private lateinit var firebaseAuth: FirebaseAuth
 
     //constants to pick video
     private val VIDEO_PICK_GALLERY_CODE = 100
@@ -74,6 +77,7 @@ class AddVideoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_video)
 
+        firebaseAuth = FirebaseAuth.getInstance()
         //init actionbar
        // actionBar = supportActionBar!!
         //title
@@ -170,6 +174,7 @@ class AddVideoActivity : AppCompatActivity() {
                                 hashMap["Resep"] = "$resep"
                                 hashMap["Step"] = "$step"
                                 hashMap["Deskripsi"] = "$description"
+                                hashMap["uid"] = "${firebaseAuth.uid}"
                                 Log.d("data realtime : ", "${timestamp}, ${title} , ${downloadUri}")
                                 //put the above info to db
                                 val dbReference = FirebaseDatabase.getInstance().getReference("Videos")
@@ -180,6 +185,8 @@ class AddVideoActivity : AppCompatActivity() {
                                         progressDialog.dismiss()
                                         Log.d("data realtime : ", "${timestamp}, ${title} , ${downloadUri}")
                                         Toast.makeText(this,"Video Uploaded", Toast.LENGTH_SHORT).show()
+                                        startActivity(Intent(this@AddVideoActivity, DashboardActivity::class.java))
+                                        finish()
                                     }
                                     .addOnFailureListener{ e ->
                                         //failed adding video info

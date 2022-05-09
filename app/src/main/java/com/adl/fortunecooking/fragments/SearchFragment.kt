@@ -59,14 +59,14 @@ class SearchFragment : Fragment() {
                         val namaresep= data.child("title").getValue(String::class.java)
                         val imagelink = data.child("ImageUri").getValue(String::class.java)
                         val videolink = data.child("videoUri").getValue(String::class.java)
-                        val userUid = data.child("userId").getValue(String::class.java)
+                        val uid = data.child("uid").getValue(String::class.java)
                         val rating = data.child("rating").getValue(String::class.java)
                         val idVideo = data.child("id").getValue(String::class.java)
                         val desc = data.child("Deskripsi").getValue(String::class.java)
                         val resep = data.child("Resep").getValue(String::class.java)
                         val step = data.child("Step").getValue(String::class.java)
 
-                        lstDataResep.add( ResepModel(idVideo.toString(),namaresep.toString(),userUid.toString(),imagelink.toString(), videolink.toString(),rating.toString(),resep.toString(),step.toString(), desc.toString()))
+                        lstDataResep.add( ResepModel(idVideo.toString(),namaresep.toString(),uid.toString(),imagelink.toString(), videolink.toString(),rating.toString(),resep.toString(),step.toString(), desc.toString()))
                         // Log.d("TAG", "nama: ${namaresep}\nimagelink: ${imagelink}")
                     }
                     // resepAdapter.notifyDataSetChanged()
@@ -88,7 +88,7 @@ class SearchFragment : Fragment() {
                 println("${dataresep.title} matches")
                 val resep:String=dataresep.title.toString()
                 //Toast.makeText(activity,"${dataresep.title} matches",Toast.LENGTH_LONG).show()
-                lstSearch.add( ResepModel(dataresep.id,dataresep.title,dataresep.userId,dataresep.ImageUri,dataresep.videoUri,dataresep.rating,dataresep.Resep,dataresep.Step, dataresep.Deskripsi))
+                lstSearch.add( ResepModel(dataresep.id,dataresep.title,dataresep.uid,dataresep.ImageUri,dataresep.videoUri,dataresep.rating,dataresep.Resep,dataresep.Step, dataresep.Deskripsi))
             }
         }
         searchAdapter.notifyDataSetChanged()
