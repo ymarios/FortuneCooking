@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="0.5"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".DetailResepActivity">
 
@@ -23,8 +24,8 @@
 
                 <ImageView
                     android:id="@+id/imgFoodDetail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
                     android:layout_marginEnd="0dp"
@@ -32,48 +33,31 @@
                     app:srcCompat="@drawable/food2" />
 
                 <androidx.constraintlayout.utils.widget.ImageFilterButton
-                    android:id="@+id/imageFilterButton"
+                    android:id="@+id/btnBackDetailResep"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
                     android:backgroundTint="#00FFFFFF"
-                    app:srcCompat="@drawable/ic_back" />
+                    app:srcCompat="@drawable/ic_back"
+                    tools:ignore="SpeakableTextPresentCheck" />
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:cardBackgroundColor="@color/temp_kuning_cerah">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
+                android:background="@color/white"
                 android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/btn_set_rating"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        android:text="beri rating" />
-
-                    <Button
-                        android:id="@+id/btnPlayVideo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="1"
-                        android:drawableLeft="@android:drawable/ic_media_play"
-                        android:text="Play Video" />
-                </LinearLayout>
 
                 <TextView
                     android:id="@+id/txtNameDetail"
@@ -81,22 +65,62 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_bold"
                     android:text="Iga bakar mak nyus"
-                    android:textSize="24sp" />
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <RatingBar
+                    android:id="@+id/ratingDetail"
+                    style="?android:attr/ratingBarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="4dp"
+                    android:numStars="5" />
 
                 <TextView
                     android:id="@+id/txtDescriptionDetail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
+                    android:backgroundTint="@color/temp_Kuning_semi_abu_opacity_40"
                     android:text="TextView"
                     android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@color/temp_Kuning_semi_abu_opacity_40"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnPlayVideo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:drawableLeft="@android:drawable/ic_media_play"
+                        android:text="Play Video" />
+
+                    <Button
+                        android:id="@+id/btnAddFav"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:drawableLeft="@drawable/ic_unsavedwatch"
+                        android:text="@string/add_favorite" />
+
+                </LinearLayout>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/white">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -110,12 +134,14 @@
                     android:layout_margin="10dp"
                     android:fontFamily="@font/aleo_bold"
                     android:text="Bahan :"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txtResepDetail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
                     android:layout_marginLeft="15dp"
                     android:text="TextView" />
 
@@ -126,25 +152,24 @@
                     android:layout_margin="10dp"
                     android:fontFamily="@font/aleo_bold"
                     android:text="Langkah-langkah :"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txtStepDetail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
                     android:layout_marginLeft="15dp"
                     android:text="TextView" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    app:cardBackgroundColor="@color/white" />
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"></LinearLayout>
-        </androidx.cardview.widget.CardView>
     </LinearLayout>
 </ScrollView>

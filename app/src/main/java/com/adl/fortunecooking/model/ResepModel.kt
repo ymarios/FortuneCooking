@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 data class ResepModel(
     var id:String,
     var title:String,
-    var userId:String,
+    var uid:String,
     var ImageUri:String,
     var videoUri:String,
     var rating:String,

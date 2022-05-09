@@ -33,5 +33,6 @@
     <string name="upload">Upload</string>
     <string name="input_video">Input Video</string>
     <string name="cr">Cover resep</string>
+    <string name="add_favorite">Add Favorite</string>
 
 </resources>

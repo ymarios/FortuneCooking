@@ -37,19 +37,6 @@
                 android:layout_height="match_parent"
                 app:srcCompat="@drawable/food2" />
 
-            <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_gravity="bottom"
-                android:layout_marginEnd="2dp"
-                android:layout_marginBottom="0dp"
-                android:background="@android:color/transparent"
-                android:foregroundGravity="bottom"
-                app:srcCompat="@drawable/ic_unsavedwatch" />
-
         </RelativeLayout>
 
         <LinearLayout

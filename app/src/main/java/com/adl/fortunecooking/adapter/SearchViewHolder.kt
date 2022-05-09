@@ -1,26 +1,23 @@
 package com.adl.fortunecooking.adapter
 
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.adl.fortunecooking.DetailResepActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.card_holder.view.*
+import kotlinx.android.synthetic.main.card_search_item.view.*
 
-class ResepViewHolder(view: View): RecyclerView.ViewHolder(view) {
-    val nameResep = view.txtResepName
-    val imageResep = view.imgResep
-    val navigasi = view.cardResep
-    val rating = view.ratingBar
+class SearchViewHolder (view: View): RecyclerView.ViewHolder(view){
+    val nameResep = view.txtResepNameSearch
+    val imageResep = view.imgResepSearch
+    val navigasi = view.cardSearch
+    val rating = view.ratingBarSearch
+    val desc = view.txtDescriptionSearch
 
 
-
-    fun bindData(adapter:ResepAdapter, position:Int){
+    fun bindData(adapter: SearchAdapter, position:Int){
 
 
         nameResep.setText(adapter.data.get(position)?.title.toString())
@@ -41,6 +38,7 @@ class ResepViewHolder(view: View): RecyclerView.ViewHolder(view) {
             adapter.parent.context.startActivity(intent)
 
         }
+        desc.setText(adapter.data.get(position).Deskripsi)
 
 
     }
