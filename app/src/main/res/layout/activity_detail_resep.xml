@@ -69,15 +69,6 @@
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
-                <RatingBar
-                    android:id="@+id/ratingDetail"
-                    style="?android:attr/ratingBarStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="4dp"
-                    android:numStars="5" />
-
                 <TextView
                     android:id="@+id/txtDescriptionDetail"
                     android:layout_width="match_parent"
@@ -96,20 +87,20 @@
                     <Button
                         android:id="@+id/btnPlayVideo"
                         android:layout_width="wrap_content"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:layout_weight="1"
                         android:drawableLeft="@android:drawable/ic_media_play"
                         android:text="Play Video" />
 
                     <Button
-                        android:id="@+id/btnAddFav"
+                        android:id="@+id/btn_set_rating"
                         android:layout_width="wrap_content"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:layout_weight="1"
-                        android:drawableLeft="@drawable/ic_unsavedwatch"
-                        android:text="@string/add_favorite" />
+                        android:drawableLeft="@drawable/ic_star"
+                        android:text="Rate This Video" />
 
                 </LinearLayout>
 

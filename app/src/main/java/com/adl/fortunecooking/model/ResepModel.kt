@@ -15,11 +15,11 @@ data class ResepModel(
     var Step:String,
     var Deskripsi:String
 ):Parcelable
-//
-//@Parcelize
-//data class Rating(
-//    var id:String,
-//    var userId:String,
-//    var videoId:String,
-//    var rateVal:Float
-//):Parcelable
+
+@Parcelize
+data class Rating(
+    var id:String,
+    var userId:String,
+    var videoId:String,
+    var rateVal:Float
+):Parcelable

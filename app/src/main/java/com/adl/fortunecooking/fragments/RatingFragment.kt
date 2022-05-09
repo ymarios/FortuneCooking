@@ -1,15 +1,23 @@
 package com.adl.fortunecooking.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Telephony
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import com.adl.fortunecooking.DashboardActivity
 import com.adl.fortunecooking.R
+import com.adl.fortunecooking.model.Rating
 import com.adl.fortunecooking.model.ResepModel
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.*
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_rating.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -23,6 +31,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class RatingFragment : DialogFragment(){
+    lateinit var database: DatabaseReference
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -66,14 +75,80 @@ class RatingFragment : DialogFragment(){
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
+        val user = Firebase.auth.currentUser
         btn_submit_rate.setOnClickListener({
             val rateVal = rate_video.getRating()
             val bundle = arguments
             val model: ResepModel? =bundle?.getParcelable("data")
-            Log.d("rateIS =","resep = ${model?.title} + user = ${model?.userId} + rate = ${rateVal}")
+            Log.d("rateIS =","resep = ${model?.title} + user = ${model?.uid} + rate = ${rateVal}")
+            if(model != null && user != null){
+               addVideoRate(model.id,user.uid,rateVal)
+            }
         })
 
 
     }
+
+    fun addVideoRate(vidId:String,userId:String,rating:Float){
+        val timestamp = ""+System.currentTimeMillis()
+
+        val hashMap = HashMap<String, Any>()
+        hashMap["id"] = "$timestamp"
+        hashMap["videoId"] = "$vidId"
+        hashMap["userId"] = "$userId"
+        hashMap["ratingValue"] = "$rating"
+
+
+
+        val dbReference = FirebaseDatabase.getInstance().getReference("Rates")
+            dbReference.child(timestamp)
+            .setValue(hashMap)
+            .addOnSuccessListener { taskSnapshot ->
+              Log.d("addrate","Succeses")
+            }
+            .addOnFailureListener{ e ->
+                Log.d("addrate","failed")
+            }
+        calcurate(vidId)
+    }
+
+    fun calcurate(vidId:String){
+        var temp: Float=0.0f
+        var count= 0
+        val rootRef = FirebaseDatabase.getInstance().reference
+        val usersRef = rootRef.child("Rates")
+        val okQuery = usersRef.orderByChild("videoId").equalTo("${vidId}")
+        val valueEventListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (ds in dataSnapshot.children) {
+                    if(ds.exists()){
+                        val rateVal = ds.child("ratingValue").getValue(String::class.java)!!.toFloat()
+                        temp += rateVal
+                        count += 1
+                    }
+
+                    Log.d("isi","${ds.child("ratingValue").getValue(String::class.java)}")
+                }
+                Log.d("isi","${temp} + ${count}")
+                val mean = temp / count
+                updateRate(mean,vidId)
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.d("TAG", databaseError.getMessage()) //Don't ignore errors!
+            }
+        }
+        okQuery.addListenerForSingleValueEvent(valueEventListener)
+    }
+
+    fun updateRate(res:Float,vidId:String){
+        val ref = FirebaseDatabase.getInstance().getReference("Videos").child(vidId)
+        println("!!!!!!!!!!! Firebase reference: ${ref.toString()}")
+
+
+        ref.child("rating").setValue(res.toString())
+
+    }
+
+
 }

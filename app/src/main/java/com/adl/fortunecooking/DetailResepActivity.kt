@@ -67,16 +67,10 @@ class DetailResepActivity : AppCompatActivity() {
         btn_set_rating.setOnClickListener({
             var arguments = Bundle()
             arguments.putParcelable("data",data);
-            var myFragment: Fragment = com.adl.fortunecooking.fragments.RatingFragment()
+            var myFragment: Fragment = RatingFragment()
             myFragment.setArguments(arguments);
+            Log.d("args",arguments.toString())
 
-//            val bundle = Bundle()
-//            bundle.putParcelable("data", data)
-//            // set Fragmentclass Arguments
-//            // set Fragmentclass Arguments
-//            val fragobj = RatingFragment()
-//            fragobj.setArguments(bundle)
-//            Log.d("bundle","${bundle}")
 
             showDialog()
         })
@@ -85,7 +79,12 @@ class DetailResepActivity : AppCompatActivity() {
     }
     fun showDialog() {
         val fragmentManager = supportFragmentManager
-        val newFragment = RatingFragment()
+
+        var arguments = Bundle()
+        arguments.putParcelable("data",data);
+        var myFragment: Fragment = RatingFragment()
+        myFragment.setArguments(arguments);
+        Log.d("args",arguments.toString())
             // The device is smaller, so show the fragment fullscreen
             val transaction = fragmentManager.beginTransaction()
             // For a little polish, specify a transition animation
@@ -93,10 +92,13 @@ class DetailResepActivity : AppCompatActivity() {
             // To make it fullscreen, use the 'content' root view as the container
             // for the fragment, which is always the root view for the activity
             transaction
-                .add(android.R.id.content, newFragment)
+                .add(android.R.id.content, myFragment)
                 .addToBackStack(null)
                 .commit()
         Log.d("popup","pop")
+
+
+
 
         btnBackDetailResep.setOnClickListener({
             onBackPressed()
