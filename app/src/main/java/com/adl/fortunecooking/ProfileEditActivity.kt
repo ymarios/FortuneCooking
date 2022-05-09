@@ -67,17 +67,14 @@ class ProfileEditActivity : AppCompatActivity() {
     }
 
     private var name = ""
-    private var email = ""
+
     private fun validateData() {
         //get data
         name = txtNamaAccEdit.text.toString().trim()
-        email = txtEmailAccEdit.text.toString().trim()
 
         //validate data
         if (name.isEmpty()) {
             Toast.makeText(this, "Enter name", Toast.LENGTH_SHORT).show()
-        } else if (email.isEmpty()) {
-            Toast.makeText(this, "Enter email", Toast.LENGTH_SHORT).show()
         }
         else{
             //data complete
