@@ -14,10 +14,12 @@ import com.adl.fortunecooking.ProfileEditActivity
 import com.adl.fortunecooking.R
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_account.*
 
 //// TODO: Rename parameter arguments, choose names that match
@@ -70,6 +72,8 @@ class AccountFragment : Fragment() {
 
     private fun loadUserInfo() {
         //db referencee to load user info
+        val user = Firebase.auth.currentUser
+
         val ref = FirebaseDatabase.getInstance().getReference("Users")
         ref.child(firebaseAuth.uid!!)
             .addValueEventListener(object : ValueEventListener{

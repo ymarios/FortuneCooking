@@ -1,27 +1,18 @@
 package com.adl.fortunecooking
 
-import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.adl.fortunecooking.fragments.RatingFragment
-import android.service.controls.ControlsProviderService.TAG
 
-import android.widget.Toast
 import com.adl.fortunecooking.model.ResepModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_detail_resep.*
-import kotlinx.android.synthetic.main.fragment_rating.*
 
 class DetailResepActivity : AppCompatActivity() {
 
@@ -53,8 +44,8 @@ class DetailResepActivity : AppCompatActivity() {
             txtNameDetail.setText(data.title)
             txtDescriptionDetail.setText(data.Deskripsi)
             txtResepDetail.setText(data.Resep)
-            txtStepDetail.setText(data.id)
-
+            txtStepDetail.setText(data.Step)
+            rateView.setText("${data.rating.toFloat()}")
 
 
         }
@@ -64,16 +55,17 @@ class DetailResepActivity : AppCompatActivity() {
             startActivity(intent)
         })
 
-        btn_set_rating.setOnClickListener({
+        btn_back_home.setOnClickListener({
             var arguments = Bundle()
             arguments.putParcelable("data",data);
             var myFragment: Fragment = RatingFragment()
             myFragment.setArguments(arguments);
             Log.d("args",arguments.toString())
-
-
             showDialog()
+//            finish()
+//            onBackPressed()
         })
+
 
 
     }
@@ -99,10 +91,10 @@ class DetailResepActivity : AppCompatActivity() {
 
 
 
-
-        btnBackDetailResep.setOnClickListener({
-            onBackPressed()
-        })
+//
+//        btn_back_home.setOnClickListener({
+//            onBackPressed()
+//        })
 
 //        btnAddFav.setOnClickListener({
 ////            if (firebaseAuth.currentUser == null) {

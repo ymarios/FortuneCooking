@@ -33,7 +33,7 @@
                     app:srcCompat="@drawable/food2" />
 
                 <androidx.constraintlayout.utils.widget.ImageFilterButton
-                    android:id="@+id/btnBackDetailResep"
+                    android:id="@+id/btn_back_home"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -59,15 +59,30 @@
                 android:background="@color/white"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/txtNameDetail"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_bold"
-                    android:text="Iga bakar mak nyus"
-                    android:textAlignment="center"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtNameDetail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="Iga bakar mak nyus"
+                        android:textAlignment="center"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/rateView"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableRight="@drawable/ic_ratestar"
+                        android:gravity="right"
+                        android:text="TextView" />
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/txtDescriptionDetail"

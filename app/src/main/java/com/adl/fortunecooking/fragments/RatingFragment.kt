@@ -19,6 +19,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_rating.*
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -83,7 +85,12 @@ class RatingFragment : DialogFragment(){
             Log.d("rateIS =","resep = ${model?.title} + user = ${model?.uid} + rate = ${rateVal}")
             if(model != null && user != null){
                addVideoRate(model.id,user.uid,rateVal)
+                dismiss()
+                activity.let{
+                    activity?.finish()
+                }
             }
+
         })
 
 
@@ -131,7 +138,10 @@ class RatingFragment : DialogFragment(){
                 }
                 Log.d("isi","${temp} + ${count}")
                 val mean = temp / count
-                updateRate(mean,vidId)
+                val df = DecimalFormat("#.#")
+                df.roundingMode = RoundingMode.DOWN
+                val roundoff = df.format(mean)
+                updateRate(roundoff.toFloat(),vidId)
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
