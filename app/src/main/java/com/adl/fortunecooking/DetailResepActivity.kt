@@ -1,5 +1,6 @@
 package com.adl.fortunecooking
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -30,6 +31,7 @@ import java.text.DecimalFormat
 class DetailResepActivity : AppCompatActivity() {
 
     lateinit var data:ResepModel
+    private var isInMyfavorite = false
 
 //    private var recipeId = ""
 
@@ -80,12 +82,24 @@ class DetailResepActivity : AppCompatActivity() {
             showDialog()
 
         })
-
         isFavorite(data.id,currentUser!!)
         btn_add_favorite.setOnClickListener({
-            btn_add_favorite.setCompoundDrawablesWithIntrinsicBounds(com.adl.fortunecooking.R.drawable.ic_savedwatch, 0, 0, 0);
-            addFavorite(data.id,currentUser!!)
+
+            if(isInMyfavorite){
+
+//                btn_add_favorite.setCompoundDrawablesWithIntrinsicBounds(com.adl.fortunecooking.R.drawable.ic_unsavedwatch, 0, 0, 0);
+                unFavorite(data.id)
+            }else{
+
+//                btn_add_favorite.setCompoundDrawablesWithIntrinsicBounds(com.adl.fortunecooking.R.drawable.ic_savedwatch, 0, 0, 0);
+                addFavorite(data.id,currentUser!!)
+
+            }
         })
+
+
+
+
         btn_back_home.setOnClickListener({
             onBackPressed()
         })
@@ -112,24 +126,45 @@ class DetailResepActivity : AppCompatActivity() {
     }
     fun isFavorite(vidId:String,currentUser:FirebaseUser){
 //        val currentUser = Firebase.auth.currentUser
-        var found = false
+
         val rootRef = FirebaseDatabase.getInstance().reference
-        val usersRef = rootRef.child("Rates")
+        val usersRef = rootRef.child("Favorites")
         val okQuery = usersRef.orderByChild("videoId").equalTo("${vidId}")
         val valueEventListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (ds in dataSnapshot.children) {
                     if(ds.exists()){
                         val userId = ds.child("userId").getValue(String::class.java)!!
-                        Log.d("status","${userId}")
                         if(userId == currentUser?.uid){
-                            found = true
+                            isInMyfavorite = true
+//                            unFavorite(vidId)
+//                            btn_add_favorite.setCompoundDrawablesWithIntrinsicBounds(com.adl.fortunecooking.R.drawable.ic_savedwatch, 0, 0, 0);
                         }else{
-                            found = false
+                            isInMyfavorite = false
+//                            addFavorite(vidId,currentUser)
+//                            btn_add_favorite.setCompoundDrawablesWithIntrinsicBounds(com.adl.fortunecooking.R.drawable.ic_unsavedwatch, 0, 0, 0);
                         }
+                        if (isInMyfavorite){
+                        //available in favorite
+                        Log.d(TAG, "onDataChange: available in favorite")
+                            //set drawable top icon
+                            btn_add_favorite.setCompoundDrawablesWithIntrinsicBounds(com.adl.fortunecooking.R.drawable.ic_savedwatch, 0, 0, 0);
+                            btn_add_favorite.text = "Remove Favorite"
+                    }
+                    else{
+                        //not available in favorite
+                        Log.d(TAG, "onDataChange: not available in favorite")
+                        //set drawable top icon
+                            btn_add_favorite.setCompoundDrawablesWithIntrinsicBounds(com.adl.fortunecooking.R.drawable.ic_unsavedwatch, 0, 0, 0);
+                            btn_add_favorite.text = "Add Favorite"
+
+                    }
                     }
                 }
-                Log.d("status","${found}")
+
+                Log.d("status","")
+
+
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -137,15 +172,32 @@ class DetailResepActivity : AppCompatActivity() {
             }
         }
         okQuery.addListenerForSingleValueEvent(valueEventListener)
-        Log.d("status2","${found}")
+        Log.d("status2","${isInMyfavorite}")
+
+    }
+
+
+
+    fun unFavorite(vidId:String){
+        val ref = FirebaseDatabase.getInstance().getReference("Favorites")
+        ref.child(vidId)
+            .removeValue()
+            .addOnSuccessListener {
+//                Log.d(TAG, "removeFromFavorite: Removed from fav")
+//                Toast.makeText(this,"Removed from fav", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { e->
+//                Log.d(TAG, "removeFromFavorite: Failed to remove from fave due to ${e.message}")
+//                Toast.makeText(this,"Failed to remove from fav due to ${e.message}", Toast.LENGTH_SHORT).show()
+            }
     }
 
     fun addFavorite(vidId:String,currentUser:FirebaseUser){
         val timestamp = ""+System.currentTimeMillis()
 
         val hashMap = HashMap<String, Any>()
-        hashMap["id"] = "$timestamp"
-        hashMap["videoId"] = "$vidId"
+        hashMap["id"] = timestamp
+        hashMap["videoId"] = vidId
         hashMap["userId"] = currentUser.uid
         hashMap["status"] = "true"
 
