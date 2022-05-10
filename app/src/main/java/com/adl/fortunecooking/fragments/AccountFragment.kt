@@ -66,12 +66,6 @@ class AccountFragment : Fragment() {
                 }
         })
 
-        btnMyVideos.setOnClickListener({
-            activity?.let{
-                val intent = Intent(it, MyVideos::class.java)
-                it.startActivity(intent)
-            }
-        })
     }
 
     private fun loadUserInfo() {
