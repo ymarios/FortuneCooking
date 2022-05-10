@@ -86,9 +86,9 @@ class RatingFragment : DialogFragment(){
             if(model != null && user != null){
                addVideoRate(model.id,user.uid,rateVal)
                 dismiss()
-                activity.let{
-                    activity?.finish()
-                }
+//                activity.let{
+//                    activity?.finish()
+//                }
             }
 
         })

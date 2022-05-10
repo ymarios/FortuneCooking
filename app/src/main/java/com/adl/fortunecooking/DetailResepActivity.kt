@@ -1,9 +1,13 @@
 package com.adl.fortunecooking
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.WindowInsets
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.adl.fortunecooking.fragments.RatingFragment
@@ -12,7 +16,16 @@ import com.adl.fortunecooking.model.ResepModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_detail_resep.*
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 class DetailResepActivity : AppCompatActivity() {
 
@@ -29,6 +42,9 @@ class DetailResepActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_resep)
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
+        setFullscreen()
+        val currentUser = Firebase.auth.currentUser
         if(intent.hasExtra("data")) {
             data = intent.getParcelableExtra("data")!!
             //isUpdate = true
@@ -55,46 +71,100 @@ class DetailResepActivity : AppCompatActivity() {
             startActivity(intent)
         })
 
-        btn_back_home.setOnClickListener({
+        btn_set_rating.setOnClickListener({
             var arguments = Bundle()
             arguments.putParcelable("data",data);
             var myFragment: Fragment = RatingFragment()
             myFragment.setArguments(arguments);
             Log.d("args",arguments.toString())
             showDialog()
-//            finish()
-//            onBackPressed()
+
         })
-
-
-
+        btn_add_favorite.setOnClickListener({
+            btn_add_favorite.setCompoundDrawablesWithIntrinsicBounds(com.adl.fortunecooking.R.drawable.ic_savedwatch, 0, 0, 0);
+            addFavorite(data.id,currentUser!!)
+        })
+        btn_back_home.setOnClickListener({
+            onBackPressed()
+        })
     }
     fun showDialog() {
         val fragmentManager = supportFragmentManager
 
         var arguments = Bundle()
-        arguments.putParcelable("data",data);
+        arguments.putParcelable("data", data);
         var myFragment: Fragment = RatingFragment()
         myFragment.setArguments(arguments);
-        Log.d("args",arguments.toString())
-            // The device is smaller, so show the fragment fullscreen
-            val transaction = fragmentManager.beginTransaction()
-            // For a little polish, specify a transition animation
-            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            // To make it fullscreen, use the 'content' root view as the container
-            // for the fragment, which is always the root view for the activity
-            transaction
-                .add(android.R.id.content, myFragment)
-                .addToBackStack(null)
-                .commit()
-        Log.d("popup","pop")
+        Log.d("args", arguments.toString())
+        // The device is smaller, so show the fragment fullscreen
+        val transaction = fragmentManager.beginTransaction()
+        // For a little polish, specify a transition animation
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+        // To make it fullscreen, use the 'content' root view as the container
+        // for the fragment, which is always the root view for the activity
+        transaction
+            .add(android.R.id.content, myFragment)
+            .addToBackStack(null)
+            .commit()
+        Log.d("popup", "pop")
+    }
+    fun isFavorite(){
+        val rootRef = FirebaseDatabase.getInstance().reference
+        val usersRef = rootRef.child("Rates")
+        val okQuery = usersRef.orderByChild("videoId").equalTo("")
+        val valueEventListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (ds in dataSnapshot.children) {
+                    if(ds.exists()){
+
+                    }
+
+                    Log.d("status","")
+                }
+
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.d("TAG", databaseError.getMessage()) //Don't ignore errors!
+            }
+        }
+        okQuery.addListenerForSingleValueEvent(valueEventListener)
+    }
+
+    fun addFavorite(vidId:String,currentUser:FirebaseUser){
+        val timestamp = ""+System.currentTimeMillis()
+
+        val hashMap = HashMap<String, Any>()
+        hashMap["id"] = "$timestamp"
+        hashMap["videoId"] = "$vidId"
+        hashMap["userId"] = currentUser.uid
+        hashMap["status"] = "true"
+
+        val dbReference = FirebaseDatabase.getInstance().getReference("Favorites")
+        dbReference.child(timestamp)
+            .setValue(hashMap)
+            .addOnSuccessListener { taskSnapshot ->
+                Log.d("addrate","Succeses")
+            }
+            .addOnFailureListener{ e ->
+                Log.d("addrate","failed")
+            }
+
+    }
+    fun setFullscreen(){
+        @Suppress("DEPRECATION")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
+        }
+    }
 
 
 
-//
-//        btn_back_home.setOnClickListener({
-//            onBackPressed()
-//        })
 
 //        btnAddFav.setOnClickListener({
 ////            if (firebaseAuth.currentUser == null) {
@@ -185,4 +255,3 @@ class DetailResepActivity : AppCompatActivity() {
 //                Toast.makeText(this,"Failed to remove from fav due to ${e.message}", Toast.LENGTH_SHORT).show()
 //            }
     }
-}
