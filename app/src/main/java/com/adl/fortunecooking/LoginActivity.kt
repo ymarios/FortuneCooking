@@ -2,9 +2,12 @@ package com.adl.fortunecooking
 
 import android.app.ProgressDialog
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +28,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        setFullscreen()
 
         firebaseAuth = FirebaseAuth.getInstance()
 
@@ -105,6 +109,17 @@ class LoginActivity : AppCompatActivity() {
                 progressDialog.dismiss()
                 Toast.makeText(this,"Login failed due to ${e.message}", Toast.LENGTH_SHORT).show()
             }
+    }
+    fun setFullscreen(){
+        @Suppress("DEPRECATION")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
+        }
     }
 
 //    private fun checkUser() {

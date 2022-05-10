@@ -122,7 +122,7 @@
                         android:textSize="12sp" />
 
                     <Button
-                        android:id="@+id/btnAddFavorite"
+                        android:id="@+id/btn_add_favorite"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"

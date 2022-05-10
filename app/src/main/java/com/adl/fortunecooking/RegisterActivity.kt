@@ -4,10 +4,13 @@ import android.app.ProgressDialog
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.widget.Toast
 import com.adl.fortunecooking.databinding.ActivityRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -27,6 +30,7 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+        setFullscreen()
 
         firebaseAuth = FirebaseAuth.getInstance()
 
@@ -141,6 +145,19 @@ class RegisterActivity : AppCompatActivity() {
         firebaseAuth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener {
                 //account created
+                val user = firebaseAuth.currentUser
+
+                val profileUpdates = userProfileChangeRequest {
+                    displayName = et_register_nama.text.toString()
+                    photoUri = Uri.parse("https://example.com/jane-q-user/profile.jpg")
+                }
+
+                user!!.updateProfile(profileUpdates)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Log.d(TAG, "User profile updated.")
+                        }
+                    }
                 updateUserInfo()
             }
             .addOnFailureListener { e->
@@ -188,5 +205,16 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(this,"Failed saving user info due to ${e.message}", Toast.LENGTH_SHORT).show()
             }
 
+    }
+    fun setFullscreen(){
+        @Suppress("DEPRECATION")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
+        }
     }
 }
