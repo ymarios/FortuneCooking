@@ -80,6 +80,8 @@ class DetailResepActivity : AppCompatActivity() {
             showDialog()
 
         })
+
+        isFavorite(data.id,currentUser!!)
         btn_add_favorite.setOnClickListener({
             btn_add_favorite.setCompoundDrawablesWithIntrinsicBounds(com.adl.fortunecooking.R.drawable.ic_savedwatch, 0, 0, 0);
             addFavorite(data.id,currentUser!!)
@@ -108,20 +110,26 @@ class DetailResepActivity : AppCompatActivity() {
             .commit()
         Log.d("popup", "pop")
     }
-    fun isFavorite(){
+    fun isFavorite(vidId:String,currentUser:FirebaseUser){
+//        val currentUser = Firebase.auth.currentUser
+        var found = false
         val rootRef = FirebaseDatabase.getInstance().reference
         val usersRef = rootRef.child("Rates")
-        val okQuery = usersRef.orderByChild("videoId").equalTo("")
+        val okQuery = usersRef.orderByChild("videoId").equalTo("${vidId}")
         val valueEventListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (ds in dataSnapshot.children) {
                     if(ds.exists()){
-
+                        val userId = ds.child("userId").getValue(String::class.java)!!
+                        Log.d("status","${userId}")
+                        if(userId == currentUser?.uid){
+                            found = true
+                        }else{
+                            found = false
+                        }
                     }
-
-                    Log.d("status","")
                 }
-
+                Log.d("status","${found}")
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -129,6 +137,7 @@ class DetailResepActivity : AppCompatActivity() {
             }
         }
         okQuery.addListenerForSingleValueEvent(valueEventListener)
+        Log.d("status2","${found}")
     }
 
     fun addFavorite(vidId:String,currentUser:FirebaseUser){
