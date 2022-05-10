@@ -28,14 +28,12 @@
         <entry key="..\:/ADL/finalProject/FortuneCooking/app/src/main/res/layout/activity_profile_edit.xml" value="0.175" />
         <entry key="..\:/ADL/finalProject/FortuneCooking/app/src/main/res/layout/activity_register.xml" value="0.2" />
         <entry key="..\:/ADL/finalProject/FortuneCooking/app/src/main/res/layout/card_holder.xml" value="0.25" />
+        <entry key="..\:/ADL/finalProject/FortuneCooking/app/src/main/res/layout/card_search_item.xml" value="0.17708333333333334" />
+        <entry key="..\:/ADL/finalProject/FortuneCooking/app/src/main/res/layout/fragment_favorites.xml" value="0.17708333333333334" />
         <entry key="..\:/ADL/finalProject/FortuneCooking/app/src/main/res/layout/fragment_home.xml" value="0.15" />
         <entry key="..\:/ADL/finalProject/FortuneCooking/app/src/main/res/layout/fragment_rating.xml" value="0.264" />
         <entry key="..\:/ADL/finalProject/FortuneCooking/app/src/main/res/layout/fragment_search.xml" value="0.15364583333333334" />
         <entry key="..\:/ADL/finalProject/FortuneCooking/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.24375" />
-        <entry key="..\:/FortuneCooking/app/src/main/res/drawable/ic_favorite.xml" value="0.1015" />
-        <entry key="..\:/FortuneCooking/app/src/main/res/drawable/ic_unsavedwatch.xml" value="0.122" />
-        <entry key="..\:/FortuneCooking/app/src/main/res/layout/activity_dashboard.xml" value="0.2" />
-        <entry key="..\:/FortuneCooking/app/src/main/res/layout/activity_detail_resep.xml" value="0.2" />
         <entry key="..\:/FortuneCooking/app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="..\:/FortuneCooking/app/src/main/res/layout/activity_main.xml" value="0.15" />
         <entry key="..\:/Users/Robby AR/AndroidStudioProjects/FortuneCooking/app/src/main/res/layout/activity_add_video.xml" value="0.264" />
@@ -49,15 +47,6 @@
         <entry key="..\:/Users/Robby AR/AndroidStudioProjects/FortuneCooking/app/src/main/res/layout/fragment_home.xml" value="0.176" />
         <entry key="..\:/Users/Robby AR/AndroidStudioProjects/FortuneCooking/app/src/main/res/layout/fragment_search.xml" value="0.2" />
         <entry key="..\:/Users/Robby AR/AndroidStudioProjects/FortuneCooking/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.163" />
-        <entry key="..\:/FortuneCooking/app/src/main/res/layout/activity_my_videos.xml" value="0.19293478260869565" />
-        <entry key="..\:/FortuneCooking/app/src/main/res/layout/activity_play_video.xml" value="0.1" />
-        <entry key="..\:/FortuneCooking/app/src/main/res/layout/activity_profile_edit.xml" value="0.25" />
-        <entry key="..\:/FortuneCooking/app/src/main/res/layout/activity_register.xml" value="0.1" />
-        <entry key="..\:/FortuneCooking/app/src/main/res/layout/card_holder.xml" value="0.22" />
-        <entry key="..\:/FortuneCooking/app/src/main/res/layout/fragment_account.xml" value="0.22" />
-        <entry key="..\:/FortuneCooking/app/src/main/res/layout/fragment_favorites.xml" value="0.15" />
-        <entry key="..\:/FortuneCooking/app/src/main/res/layout/fragment_home.xml" value="0.25" />
-        <entry key="..\:/FortuneCooking/app/src/main/res/layout/fragment_search.xml" value="0.1" />
       </map>
     </option>
   </component>

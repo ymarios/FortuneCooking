@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adl.fortunecooking.R
 import com.adl.fortunecooking.adapter.ResepAdapter
+import com.adl.fortunecooking.adapter.SearchAdapter
 import com.adl.fortunecooking.model.ResepModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
@@ -30,7 +31,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 class FavoritesFragment : Fragment() {
     lateinit var lstDataResep : ArrayList<ResepModel>
     lateinit var database: DatabaseReference
-    lateinit var resepAdapter: ResepAdapter
+    lateinit var favAdapter: SearchAdapter
 //    // TODO: Rename and change types of parameters
 //    private var param1: String? = null
 //    private var param2: String? = null
@@ -101,7 +102,7 @@ class FavoritesFragment : Fragment() {
 
                     // Log.d("TAG", "nama: ${namaresep}\nimagelink: ${imagelink}")
                 }
-                resepAdapter.notifyDataSetChanged()
+                favAdapter.notifyDataSetChanged()
 
             } else {
                 Log.d("TAG", task.exception!!.message!!) //Don't ignore potential errors!
@@ -109,10 +110,10 @@ class FavoritesFragment : Fragment() {
         }
         lstDataResep = ArrayList<ResepModel>()
 
-        resepAdapter = ResepAdapter(lstDataResep)
+        favAdapter = SearchAdapter(lstDataResep)
         rcFavorite.apply{
             layoutManager = LinearLayoutManager(activity)
-            adapter = resepAdapter
+            adapter = favAdapter
         }
 //        rcFavorite.apply {
 //            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,true)
