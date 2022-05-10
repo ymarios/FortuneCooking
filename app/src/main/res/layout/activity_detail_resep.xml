@@ -68,9 +68,9 @@
                         android:id="@+id/txtNameDetail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_bold"
+                        android:layout_weight="8"
+                        android:fontFamily="@font/berkshire_swash"
                         android:text="Iga bakar mak nyus"
-                        android:textAlignment="center"
                         android:textSize="24sp"
                         android:textStyle="bold" />
 
@@ -81,7 +81,8 @@
                         android:layout_weight="1"
                         android:drawableRight="@drawable/ic_ratestar"
                         android:gravity="right"
-                        android:text="TextView" />
+                        android:text="5"
+                        android:textSize="18sp" />
                 </LinearLayout>
 
                 <TextView
