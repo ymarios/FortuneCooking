@@ -68,7 +68,7 @@
                         android:id="@+id/txtNameDetail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="8"
+                        android:layout_weight="4"
                         android:fontFamily="@font/berkshire_swash"
                         android:text="Iga bakar mak nyus"
                         android:textSize="24sp"
@@ -101,6 +101,7 @@
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:drawableLeft="@android:drawable/ic_media_play"
+                    android:fontFamily="@font/aleo_bold"
                     android:text="Play Video" />
 
                 <LinearLayout
@@ -116,7 +117,9 @@
                         android:layout_margin="5dp"
                         android:layout_weight="1"
                         android:drawableLeft="@drawable/ic_star"
-                        android:text="Rate Recipe" />
+                        android:fontFamily="@font/aleo_bold"
+                        android:text="Rate Recipe"
+                        android:textSize="12sp" />
 
                     <Button
                         android:id="@+id/btnAddFavorite"
@@ -125,7 +128,9 @@
                         android:layout_margin="5dp"
                         android:layout_weight="1"
                         android:drawableLeft="@drawable/ic_baseline_favorite_border_24"
-                        android:text="@string/add_favorite" />
+                        android:fontFamily="@font/aleo_bold"
+                        android:text="@string/add_favorite"
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
