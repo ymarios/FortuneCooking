@@ -80,22 +80,25 @@ class FavoritesFragment : Fragment() {
     }
 
     fun getFavorite(vidId:String){
-        database= FirebaseDatabase.getInstance().reference.child("Videos").child("${vidId}")
+        database= FirebaseDatabase.getInstance().reference.child("Videos")
         database.get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val snapshot = task.result
-                lstDataResep.clear()
+//                lstDataResep.clear()
                 for (data in snapshot.children){
-                    val namaresep= data.child("title").getValue(String::class.java)
-                    val imagelink = data.child("ImageUri").getValue(String::class.java)
-                    val videolink = data.child("videoUri").getValue(String::class.java)
-                    val userUid = data.child("userId").getValue(String::class.java)
-                    val rating = data.child("rating").getValue(String::class.java)
-                    val idVideo = data.child("id").getValue(String::class.java)
-                    val desc = data.child("Deskripsi").getValue(String::class.java)
-                    val resep = data.child("Resep").getValue(String::class.java)
-                    val step = data.child("Step").getValue(String::class.java)
-                    lstDataResep.add( ResepModel(idVideo.toString(),namaresep.toString(),userUid.toString(),imagelink.toString(), videolink.toString(),rating.toString(),resep.toString(),step.toString(), desc.toString()))
+                    if(data.child("id").getValue(String::class.java) == vidId){
+                        val namaresep= data.child("title").getValue(String::class.java)
+                        val imagelink = data.child("ImageUri").getValue(String::class.java)
+                        val videolink = data.child("videoUri").getValue(String::class.java)
+                        val userUid = data.child("userId").getValue(String::class.java)
+                        val rating = data.child("rating").getValue(String::class.java)
+                        val idVideo = data.child("id").getValue(String::class.java)
+                        val desc = data.child("Deskripsi").getValue(String::class.java)
+                        val resep = data.child("Resep").getValue(String::class.java)
+                        val step = data.child("Step").getValue(String::class.java)
+                        lstDataResep.add( ResepModel(idVideo.toString(),namaresep.toString(),userUid.toString(),imagelink.toString(), videolink.toString(),rating.toString(),resep.toString(),step.toString(), desc.toString()))
+                    }
+
                     // Log.d("TAG", "nama: ${namaresep}\nimagelink: ${imagelink}")
                 }
                 resepAdapter.notifyDataSetChanged()
@@ -108,7 +111,7 @@ class FavoritesFragment : Fragment() {
 
         resepAdapter = ResepAdapter(lstDataResep)
         rcFavorite.apply{
-            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,true)
+            layoutManager = LinearLayoutManager(activity)
             adapter = resepAdapter
         }
 //        rcFavorite.apply {
