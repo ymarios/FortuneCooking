@@ -89,12 +89,11 @@ class LoginActivity : AppCompatActivity() {
 
     private fun loginuser() {
         //3) Login - Firebase Auth
+        val firebaseUser = firebaseAuth.currentUser
 
         //show progress
         progressDialog.setMessage("Logging In...")
         progressDialog.show()
-
-        val firebaseUser = firebaseAuth.currentUser
 
         firebaseAuth.signInWithEmailAndPassword(email, password)
             .addOnSuccessListener {
