@@ -65,25 +65,19 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private fun loadUserInfo() {
+    fun loadUserInfo() {
         //db referencee to load user info
         val user = Firebase.auth.currentUser
-
+        val uid = Firebase.auth.uid!!
         val ref = FirebaseDatabase.getInstance().getReference("Users")
-        ref.child(firebaseAuth.uid!!)
-            .addValueEventListener(object : ValueEventListener{
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val name = "${snapshot.child("name").value}"
-
-                    //set data
-                    txtUsername.text = name
-
-                }
-                override fun onCancelled(error: DatabaseError) {
-
-                }
-            })
-    }
+        ref.child(uid).get().addOnCompleteListener { task->
+            if(task.isSuccessful){
+                val snapshot=task.result
+                val name = "${snapshot.child("name").value}"
+                txtUsername.setText(name)
+            }
+        }
+}
 
     fun LoadDataFirebase(){
         database.get().addOnCompleteListener { task ->
@@ -123,5 +117,6 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         LoadDataFirebase()
+        loadUserInfo()
     }
 }
