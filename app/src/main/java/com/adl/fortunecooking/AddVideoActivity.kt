@@ -134,6 +134,10 @@ class AddVideoActivity : AppCompatActivity() {
         btnpickImage.setOnClickListener{
             imagePickDialog()
         }
+
+        btnBackRegister.setOnClickListener({
+            onBackPressed()
+        })
     }
 
     private fun uploadVideoFirebase() {
