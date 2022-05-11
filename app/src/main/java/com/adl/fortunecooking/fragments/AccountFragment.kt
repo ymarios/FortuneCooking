@@ -36,8 +36,6 @@ class AccountFragment : Fragment() {
 
     private lateinit var firebaseAuth: FirebaseAuth
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

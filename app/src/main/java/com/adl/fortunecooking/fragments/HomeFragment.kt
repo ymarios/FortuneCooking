@@ -14,6 +14,7 @@ import com.adl.fortunecooking.DetailResepActivity
 import com.adl.fortunecooking.R
 import com.adl.fortunecooking.adapter.ResepAdapter
 import com.adl.fortunecooking.model.ResepModel
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
@@ -24,6 +25,8 @@ import kotlinx.android.synthetic.main.fragment_home.*
 class HomeFragment : Fragment() {
     lateinit var database: DatabaseReference
     lateinit var resepAdapter: ResepAdapter
+
+    lateinit var firebaseAuth: FirebaseAuth
 
     lateinit var lstDataResep : ArrayList<ResepModel>
     override fun onCreateView(
@@ -46,7 +49,11 @@ class HomeFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         val user = Firebase.auth.currentUser
 
-        txtUsername.setText("${user!!.displayName}")
+        firebaseAuth = FirebaseAuth.getInstance()
+        loadUserInfo()
+
+//        txtUsername.setText("${user!!.displayName}")
+
         database= FirebaseDatabase.getInstance().reference.child("Videos")
         LoadDataFirebase()
 
@@ -56,6 +63,26 @@ class HomeFragment : Fragment() {
                 it.startActivity(intent)
             }
         })
+    }
+
+    private fun loadUserInfo() {
+        //db referencee to load user info
+        val user = Firebase.auth.currentUser
+
+        val ref = FirebaseDatabase.getInstance().getReference("Users")
+        ref.child(firebaseAuth.uid!!)
+            .addValueEventListener(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val name = "${snapshot.child("name").value}"
+
+                    //set data
+                    txtUsername.text = name
+
+                }
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+            })
     }
 
     fun LoadDataFirebase(){
