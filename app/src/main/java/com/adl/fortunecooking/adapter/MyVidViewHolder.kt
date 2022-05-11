@@ -1,6 +1,5 @@
 package com.adl.fortunecooking.adapter
 
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.service.controls.ControlsProviderService
@@ -30,12 +29,14 @@ class MyVidViewHolder(view: View): RecyclerView.ViewHolder(view) {
     val rating = view.ratingMyRate
     val deskripsi = view.txtMyDesc
     val delete = view.btn_delete_video
+
 //    val favorit = view.btnFavHolder
     val addFav = view.btnFavHolder
     val username_dispaly = view.tvUsername
     lateinit var database: DatabaseReference
 
     fun bindData(adapter: MyVidAdapter, position: Int) {
+
         nameResep.setText(adapter.data.get(position)?.title.toString())
         deskripsi.setText(adapter.data.get(position).Deskripsi)
         imageResep?.let {
@@ -77,15 +78,14 @@ class MyVidViewHolder(view: View): RecyclerView.ViewHolder(view) {
     }
 
     fun deleteVideo(data: ResepModel){
+        val ref = FirebaseDatabase.getInstance().getReference("Videos")
+            ref.child(data.id)
+            .removeValue().addOnSuccessListener {
 
-        val storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(data.videoUri)
-        storageReference.delete()
-                .addOnSuccessListener {
-                    val ref = FirebaseDatabase.getInstance().getReference("Videos")
-                    ref.child(data.id)
-                        .removeValue()
-
+                    val storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(data.videoUri)
+                    storageReference.delete()
                 }.addOnFailureListener {
+
                 }
 
     }
