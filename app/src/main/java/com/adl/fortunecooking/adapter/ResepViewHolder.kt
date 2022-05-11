@@ -4,24 +4,30 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.service.controls.ControlsProviderService
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.adl.fortunecooking.DetailResepActivity
+import com.adl.fortunecooking.R
 import com.adl.fortunecooking.model.ResepModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.card_holder.view.*
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
 class ResepViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    private var isInMyFavorite=false
+    private lateinit var firebaseAuth: FirebaseAuth
     val nameResep = view.txtResepName
     val imageResep = view.imgResep
     val navigasi = view.cardResep
     val rating = view.ratingBar
     val username_dispaly = view.username_display
+    val favorit = view.btnAddFavHome
     lateinit var database: DatabaseReference
 
 
@@ -39,6 +45,7 @@ class ResepViewHolder(view: View): RecyclerView.ViewHolder(view) {
         }
 
         rating.setRating(adapter.data.get(position)?.rating.toFloat())
+        checkIsFavorite(adapter.data.get(position)?.id)
 
         navigasi.setOnClickListener{
             val intent = Intent(adapter.parent.context, DetailResepActivity::class.java)
@@ -82,5 +89,37 @@ class ResepViewHolder(view: View): RecyclerView.ViewHolder(view) {
         }
         okQuery.addListenerForSingleValueEvent(valueEventListener)
 
+    }
+
+    private fun checkIsFavorite(videosId: String){
+        firebaseAuth = FirebaseAuth.getInstance()
+        Log.d(ControlsProviderService.TAG, "checkIsFavorite: Checking if recipe is in fav or not")
+
+        val ref = FirebaseDatabase.getInstance().getReference("Users")
+        ref.child(firebaseAuth.uid!!).child("Favorites").child(videosId)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    isInMyFavorite = snapshot.exists()
+                    Log.d("Status", "onDataChange: ${snapshot.exists()}")
+                    if (isInMyFavorite){
+                        //available in favorite
+                        Log.d(ControlsProviderService.TAG, "onDataChange: available in favorite")
+                        //set drawable top icon
+                        favorit.setImageResource(R.drawable.ic_savedwatch)
+                        //  btn_add_favorite.setText("My Favorite")
+                    }
+                    else{
+                        //not available in favorite
+                        Log.d(ControlsProviderService.TAG, "onDataChange: not available in favorite")
+                        //set drawable top icon
+                        favorit.setImageResource(R.drawable.ic_unsavedwatch)
+                        // btn_add_favorite.setText("Add Favorite")
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+            })
     }
 }
