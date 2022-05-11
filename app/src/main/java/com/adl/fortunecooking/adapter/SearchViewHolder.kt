@@ -29,6 +29,7 @@ class SearchViewHolder (view: View): RecyclerView.ViewHolder(view){
     val desc = view.txtDescriptionSearch
     val favorit = view.btnAddFavHolder
     val addFav = view.btnAddFavHolder
+    val username_dispaly = view.txtUnameSearch
 
 
 
@@ -55,6 +56,7 @@ class SearchViewHolder (view: View): RecyclerView.ViewHolder(view){
         desc.setText(adapter.data.get(position).Deskripsi)
         checkIsFavorite(adapter.data.get(position)?.id)
 
+
         addFav.setOnClickListener({
             if (isInMyFavorite){
                 // already in fav, remove
@@ -65,6 +67,21 @@ class SearchViewHolder (view: View): RecyclerView.ViewHolder(view){
                 addToFavorite(adapter.data.get(position)?.id)
             }
         })
+
+        getUser(adapter.data.get(position).uid)
+    }
+
+    fun getUser(userId:String){
+        val rootRef = FirebaseDatabase.getInstance().reference
+        val usersRef = rootRef.child("Users").child(userId)
+        val okQuery = usersRef.orderByChild("uid").equalTo("${userId}")
+        usersRef.get().addOnCompleteListener { task->
+            if (task.isSuccessful){
+                val snapshot=task.result
+                val name = "${snapshot.child("name").value}"
+                username_dispaly.setText(name)
+            }
+        }
     }
 
 

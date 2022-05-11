@@ -23,6 +23,7 @@ class FavViewHolder(view: View): RecyclerView.ViewHolder(view) {
     val rating = view.ratingBarFav
     val favorit = view.btnFavHolder
     val addFav = view.btnFavHolder
+    val username_dispaly =view.txtUnameFav
     lateinit var database: DatabaseReference
 
     fun bindData(adapter: FavAdapter, position:Int){
@@ -57,40 +58,21 @@ class FavViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
         }
 
-//        getUser(adapter.data.get(position).uid)
+        getUser(adapter.data.get(position).uid)
 
     }
 
     fun getUser(userId:String){
-//        database= FirebaseDatabase.getInstance().reference.child("Videos").child("${userId}")
-//        database.get().addOnCompleteListener { task ->
-//            if (task.isSuccessful) {
-//
-//            } else {
-//                Log.d("TAG", task.exception!!.message!!) //Don't ignore potential errors!
-//            }
-//        }
         val rootRef = FirebaseDatabase.getInstance().reference
-        val usersRef = rootRef.child("Users")
+        val usersRef = rootRef.child("Users").child(userId)
         val okQuery = usersRef.orderByChild("uid").equalTo("${userId}")
-        val valueEventListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                for (ds in dataSnapshot.children) {
-                    if(ds.exists()){
-                        val username = ds.child("name").getValue(String::class.java)!!.toFloat()
-                       // username_dispaly.setText("${username}")
-                    }
-
-                    Log.d("isi","${ds.child("ratingValue").getValue(String::class.java)}")
-                }
-
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                Log.d("TAG", databaseError.getMessage()) //Don't ignore errors!
+        usersRef.get().addOnCompleteListener { task->
+            if (task.isSuccessful){
+                val snapshot=task.result
+                val name = "${snapshot.child("name").value}"
+                username_dispaly.setText(name)
             }
         }
-        okQuery.addListenerForSingleValueEvent(valueEventListener)
     }
 
 

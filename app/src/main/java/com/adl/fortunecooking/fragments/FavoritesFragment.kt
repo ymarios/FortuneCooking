@@ -58,7 +58,7 @@ class FavoritesFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         val currentUser = Firebase.auth.currentUser
         database= FirebaseDatabase.getInstance().reference.child("Users").child("${currentUser?.uid}").child("Favorites")
-        LoadDataFirebase()
+       // LoadDataFirebase()
 
 
 //    companion object {
@@ -143,6 +143,11 @@ class FavoritesFragment : Fragment() {
         }
 
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+       LoadDataFirebase()
     }
 
 }
