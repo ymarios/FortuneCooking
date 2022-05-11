@@ -4,20 +4,24 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.adl.fortunecooking.*
+import com.adl.fortunecooking.R
+import com.adl.fortunecooking.adapter.FavAdapter
+import com.adl.fortunecooking.adapter.MyVidAdapter
+import com.adl.fortunecooking.model.ResepModel
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_account.*
+import kotlinx.android.synthetic.main.fragment_favorites.*
 
 //// TODO: Rename parameter arguments, choose names that match
 //// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,6 +37,9 @@ class AccountFragment : Fragment() {
 //    // TODO: Rename and change types of parameters
 //    private var param1: String? = null
 //    private var param2: String? = null
+    lateinit var lstDataResep : ArrayList<ResepModel>
+    lateinit var database: DatabaseReference
+    lateinit var myVidAdapter: MyVidAdapter
 
     private lateinit var firebaseAuth: FirebaseAuth
 
@@ -49,7 +56,7 @@ class AccountFragment : Fragment() {
 
         firebaseAuth = FirebaseAuth.getInstance()
         loadUserInfo()
-
+        getMyVideo()
         btnLogOut.setOnClickListener({
             activity?.let{
                 val intent = Intent (it, LoginActivity::class.java)
@@ -101,6 +108,48 @@ class AccountFragment : Fragment() {
 
                 }
             })
+    }
+
+    fun getMyVideo(){
+        val currentUser = Firebase.auth.currentUser
+        database= FirebaseDatabase.getInstance().reference.child("Videos")
+        database.get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val snapshot = task.result
+                lstDataResep.clear()
+                for (data in snapshot.children){
+                    if(data.child("userId").getValue(String::class.java) == currentUser?.uid!!){
+                        val namaresep= data.child("title").getValue(String::class.java)
+                        val imagelink = data.child("ImageUri").getValue(String::class.java)
+                        val videolink = data.child("videoUri").getValue(String::class.java)
+                        val userUid = data.child("userId").getValue(String::class.java)
+                        val rating = data.child("rating").getValue(String::class.java)
+                        val idVideo = data.child("id").getValue(String::class.java)
+                        val desc = data.child("Deskripsi").getValue(String::class.java)
+                        val resep = data.child("Resep").getValue(String::class.java)
+                        val step = data.child("Step").getValue(String::class.java)
+                        lstDataResep.add( ResepModel(idVideo.toString(),namaresep.toString(),userUid.toString(),imagelink.toString(), videolink.toString(),rating.toString(),resep.toString(),step.toString(), desc.toString()))
+                    }
+
+                    // Log.d("TAG", "nama: ${namaresep}\nimagelink: ${imagelink}")
+                }
+                myVidAdapter.notifyDataSetChanged()
+
+            } else {
+                Log.d("TAG", task.exception!!.message!!) //Don't ignore potential errors!
+            }
+        }
+        lstDataResep = ArrayList<ResepModel>()
+
+        myVidAdapter = MyVidAdapter(lstDataResep)
+        rcMyVideo.apply{
+            layoutManager = LinearLayoutManager(activity)
+            adapter = myVidAdapter
+        }
+//        rcFavorite.apply {
+//            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,true)
+//            adapter = resepAdapter
+//        }
     }
 
 

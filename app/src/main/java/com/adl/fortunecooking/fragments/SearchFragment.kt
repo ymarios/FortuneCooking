@@ -59,7 +59,7 @@ class SearchFragment : Fragment() {
                         val namaresep= data.child("title").getValue(String::class.java)
                         val imagelink = data.child("ImageUri").getValue(String::class.java)
                         val videolink = data.child("videoUri").getValue(String::class.java)
-                        val uid = data.child("uid").getValue(String::class.java)
+                        val uid = data.child("userId").getValue(String::class.java)
                         val rating = data.child("rating").getValue(String::class.java)
                         val idVideo = data.child("id").getValue(String::class.java)
                         val desc = data.child("Deskripsi").getValue(String::class.java)
