@@ -29,14 +29,14 @@ class MyVidViewHolder(view: View): RecyclerView.ViewHolder(view) {
     val rating = view.ratingMyRate
     val deskripsi = view.txtMyDesc
     val delete = view.btn_delete_video
-    lateinit var parent: ViewGroup
+
 //    val favorit = view.btnFavHolder
     val addFav = view.btnFavHolder
     val username_dispaly = view.tvUsername
     lateinit var database: DatabaseReference
 
     fun bindData(adapter: MyVidAdapter, position: Int) {
-        this.parent = parent
+
         nameResep.setText(adapter.data.get(position)?.title.toString())
         deskripsi.setText(adapter.data.get(position).Deskripsi)
         imageResep?.let {
@@ -81,11 +81,11 @@ class MyVidViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val ref = FirebaseDatabase.getInstance().getReference("Videos")
             ref.child(data.id)
             .removeValue().addOnSuccessListener {
-                    Toast.makeText(parent.context,"Your video has been deleted",Toast.LENGTH_SHORT).show()
+
                     val storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(data.videoUri)
                     storageReference.delete()
                 }.addOnFailureListener {
-                    Toast.makeText(parent.context,"Your video hasn't been deleted",Toast.LENGTH_SHORT).show()
+
                 }
 
     }
