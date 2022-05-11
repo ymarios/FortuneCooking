@@ -177,7 +177,7 @@ class AddVideoActivity : AppCompatActivity() {
                                 hashMap["Resep"] = "$resep"
                                 hashMap["Step"] = "$step"
                                 hashMap["Deskripsi"] = "$description"
-                                hashMap["uid"] = "${firebaseAuth.uid}"
+                                hashMap["userId"] = "${firebaseAuth.uid}"
                                 Log.d("data realtime : ", "${timestamp}, ${title} , ${downloadUri}")
                                 //put the above info to db
                                 val dbReference = FirebaseDatabase.getInstance().getReference("Videos")
