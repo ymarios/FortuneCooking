@@ -1,39 +1,31 @@
 package com.adl.fortunecooking.adapter
 
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import android.service.controls.ControlsProviderService
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.adl.fortunecooking.DetailResepActivity
 import com.adl.fortunecooking.R
-import com.adl.fortunecooking.model.ResepModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.activity_detail_resep.*
-import kotlinx.android.synthetic.main.card_holder.view.*
-import java.math.RoundingMode
-import java.text.DecimalFormat
+import kotlinx.android.synthetic.main.card_favorite_holder.view.*
 
-class ResepViewHolder(view: View): RecyclerView.ViewHolder(view) {
+
+class FavViewHolder(view: View): RecyclerView.ViewHolder(view) {
     private var isInMyFavorite=false
     private lateinit var firebaseAuth: FirebaseAuth
-    val nameResep = view.txtResepName
-    val imageResep = view.imgResep
-    val navigasi = view.cardResep
-    val rating = view.ratingBar
-    val username_dispaly = view.username_display
-    val favorit = view.btnAddFavHome
-    val addFav = view.btnAddFavHome
+    val nameResep = view.txtResepNameFav
+    val imageResep = view.imgResepFav
+    val navigasi = view.cardFavorite
+    val rating = view.ratingBarFav
+    val favorit = view.btnFavHolder
+    val addFav = view.btnFavHolder
     lateinit var database: DatabaseReference
 
-    fun bindData(adapter:ResepAdapter, position:Int){
+    fun bindData(adapter: FavAdapter, position:Int){
         nameResep.setText(adapter.data.get(position)?.title.toString())
         imageResep?.let {
             Glide.with(adapter.parent.context)
@@ -86,7 +78,7 @@ class ResepViewHolder(view: View): RecyclerView.ViewHolder(view) {
                 for (ds in dataSnapshot.children) {
                     if(ds.exists()){
                         val username = ds.child("name").getValue(String::class.java)!!.toFloat()
-                        username_dispaly.setText("${username}")
+                       // username_dispaly.setText("${username}")
                     }
 
                     Log.d("isi","${ds.child("ratingValue").getValue(String::class.java)}")
@@ -99,8 +91,8 @@ class ResepViewHolder(view: View): RecyclerView.ViewHolder(view) {
             }
         }
         okQuery.addListenerForSingleValueEvent(valueEventListener)
-
     }
+
 
     private fun checkIsFavorite(videosId: String){
         firebaseAuth = FirebaseAuth.getInstance()
@@ -155,7 +147,7 @@ class ResepViewHolder(view: View): RecyclerView.ViewHolder(view) {
             .addOnFailureListener { e->
                 //failed to add to fav
                 Log.d(ControlsProviderService.TAG, "addToFavorite: Failed to add to fav due to ${e.message}")
-              //  Toast.makeText(this,"Failed to add to fav due to ${e.message}", Toast.LENGTH_SHORT).show()
+                //  Toast.makeText(this,"Failed to add to fav due to ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
 
@@ -168,11 +160,11 @@ class ResepViewHolder(view: View): RecyclerView.ViewHolder(view) {
             .removeValue()
             .addOnSuccessListener {
                 Log.d(ControlsProviderService.TAG, "removeFromFavorite: Removed from fav")
-             //   Toast.makeText(this,"Removed from fav", Toast.LENGTH_SHORT).show()
+                //   Toast.makeText(this,"Removed from fav", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener { e->
                 Log.d(ControlsProviderService.TAG, "removeFromFavorite: Failed to remove from fave due to ${e.message}")
-             //   Toast.makeText(this,"Failed to remove from fav due to ${e.message}", Toast.LENGTH_SHORT).show()
+                //   Toast.makeText(this,"Failed to remove from fav due to ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
 }

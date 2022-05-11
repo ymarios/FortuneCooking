@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adl.fortunecooking.R
+import com.adl.fortunecooking.adapter.FavAdapter
 import com.adl.fortunecooking.adapter.ResepAdapter
 import com.adl.fortunecooking.adapter.SearchAdapter
 import com.adl.fortunecooking.model.ResepModel
@@ -31,7 +32,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 class FavoritesFragment : Fragment() {
     lateinit var lstDataResep : ArrayList<ResepModel>
     lateinit var database: DatabaseReference
-    lateinit var favAdapter: SearchAdapter
+    lateinit var favAdapter: FavAdapter
 //    // TODO: Rename and change types of parameters
 //    private var param1: String? = null
 //    private var param2: String? = null
@@ -110,7 +111,7 @@ class FavoritesFragment : Fragment() {
         }
         lstDataResep = ArrayList<ResepModel>()
 
-        favAdapter = SearchAdapter(lstDataResep)
+        favAdapter = FavAdapter(lstDataResep)
         rcFavorite.apply{
             layoutManager = LinearLayoutManager(activity)
             adapter = favAdapter

@@ -28,6 +28,7 @@ class SearchViewHolder (view: View): RecyclerView.ViewHolder(view){
     val rating = view.ratingBarSearch
     val desc = view.txtDescriptionSearch
     val favorit = view.btnAddFavHolder
+    val addFav = view.btnAddFavHolder
 
 
 
@@ -50,12 +51,20 @@ class SearchViewHolder (view: View): RecyclerView.ViewHolder(view){
             val intent = Intent(adapter.parent.context, DetailResepActivity::class.java)
             intent.putExtra("data",adapter.data.get(position))
             adapter.parent.context.startActivity(intent)
-
         }
         desc.setText(adapter.data.get(position).Deskripsi)
-        checkIsFavorite(adapter.data.get(position).id)
+        checkIsFavorite(adapter.data.get(position)?.id)
 
-
+        addFav.setOnClickListener({
+            if (isInMyFavorite){
+                // already in fav, remove
+                removeFromFavorite(adapter.data.get(position)?.id)
+            }
+            else{
+                //not in fav, add
+                addToFavorite(adapter.data.get(position)?.id)
+            }
+        })
     }
 
 
@@ -89,5 +98,46 @@ class SearchViewHolder (view: View): RecyclerView.ViewHolder(view){
 
                 }
             })
+    }
+
+    private fun addToFavorite(videosId:String){
+        Log.d(ControlsProviderService.TAG, "addToFavorite: Adding to fav")
+        val timestamp = System.currentTimeMillis()
+
+        //setup data to add in db
+        val hashMap = HashMap<String, Any>()
+        hashMap["videosId"] = videosId
+        hashMap["timestamp"] = "${timestamp}"
+
+        //save to db
+        val ref = FirebaseDatabase.getInstance().getReference("Users")
+        ref.child(firebaseAuth.uid!!).child("Favorites").child(videosId)
+            .setValue(hashMap)
+            .addOnSuccessListener {
+                //added to fav
+                Log.d(ControlsProviderService.TAG, "addToFavorite: Added to fav")
+            }
+            .addOnFailureListener { e->
+                //failed to add to fav
+                Log.d(ControlsProviderService.TAG, "addToFavorite: Failed to add to fav due to ${e.message}")
+                //  Toast.makeText(this,"Failed to add to fav due to ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun removeFromFavorite(videosId:String){
+        Log.d(ControlsProviderService.TAG, "removeFromFavorite: Removing from fav")
+
+        //database ref
+        val ref = FirebaseDatabase.getInstance().getReference("Users")
+        ref.child(firebaseAuth.uid!!).child("Favorites").child(videosId)
+            .removeValue()
+            .addOnSuccessListener {
+                Log.d(ControlsProviderService.TAG, "removeFromFavorite: Removed from fav")
+                //   Toast.makeText(this,"Removed from fav", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { e->
+                Log.d(ControlsProviderService.TAG, "removeFromFavorite: Failed to remove from fave due to ${e.message}")
+                //   Toast.makeText(this,"Failed to remove from fav due to ${e.message}", Toast.LENGTH_SHORT).show()
+            }
     }
 }
