@@ -58,6 +58,7 @@ class AccountFragment : Fragment() {
         loadUserInfo()
         getMyVideo()
         btnLogOut.setOnClickListener({
+            firebaseAuth.signOut()
             activity?.let{
                 val intent = Intent (it, LoginActivity::class.java)
                 it.startActivity(intent)
